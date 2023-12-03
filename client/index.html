@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/style.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <link rel="shortcut icon" href="./assets/notely-high-resolution-logo.ico" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Notely</title>
+</head>
+<body class="bg-gray-200 font-roboto font-normal">
+    <nav class="w-full bg-white flex justify-between md:justify-around items-center h-[82px] shadow-sm px-2">
+        <input type="search" name="" id="" class="bg-gray-200 w-full md:w-[70%] lg:w-3/4 h-[48px] px-4 rounded-lg outline-none focus:border focus:border-blue-500">
+        <button type="button" class="hidden md:block w-[90px] h-[48px] bg-blue-400 hover:bg-blue-500 text-white text-[14px] rounded-3xl" id="button">+ Add</button>
+    </nav>
+   <section class="mx-4 md:mx-8 lg:mx-[128px]">
+    <h1 class="mt-8 text-gray-900 text-[24px] font-semibold">Your notes</h1>
+    <div class="flex md:justify-between mt-8 w-full">
+        <ul class="w-full md:w-2/4 flex text-center border-collapse">
+            <li><button class="p-2 border-b-2 border-black/[.12] w-[104px] text-gray-900 opacity-[60%] hover:opacity-[87%] focus:border-blue-400 focus:text-blue-400 focus:opacity-100 text-[16px] font-medium outline-none" autofocus>All</button></li>
+            <button class="p-2 border-b-2 border-black/[.12] w-[104px] text-gray-900 opacity-[60%] hover:opacity-[87%] focus:border-blue-400 focus:text-blue-400 focus:opacity-100 text-[16px] font-medium">PERSONAL</button>
+            <button class="p-2 border-b-2 border-black/[.12] w-[104px] text-gray-900 opacity-[60%] hover:opacity-[87%] focus:border-blue-400 focus:text-blue-400 focus:opacity-100 text-[16px] font-medium">HOME</button>
+            <button class="p-2 border-b-2 border-black/[.12] w-[104px] text-gray-900 opacity-[60%] hover:opacity-[87%] focus:border-blue-400 focus:text-blue-400 focus:opacity-100 text-[16px] font-medium">BUSINESS</button>
+        </ul>
+
+        <div class="hidden md:flex items-center gap-1">
+            <input type="checkbox" name="" id="display" class="accent-[#212121] opacity-[36%]">
+            <label for="display" class="text-[14px] text-gray-900 text-center font-normal opacity-[87%]">Show only completed notes</label>
+        </div>
+    </div>
+
+    <section class="card-container grid justify-center xl:grid-cols-2">
+        
+    </section>
+   </section>
+   <script src="./scripts/addModal.js" defer></script>
+   <script src="./scripts/dataHandler.js" defer></script>
+   <script src="./scripts/editModal.js" defer></script>
+   <script src="./scripts/deleteModal.js" defer></script>
+</body>
+</html>

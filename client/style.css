@@ -1,0 +1,186 @@
+/* css */
+.backdrop{
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  position: fixed;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.32);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal, .delete-modal{
+  background-color: #fff;
+  width: 616px;
+  height: 470px;
+  z-index: 3;
+  padding: 1rem;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.delete-modal{
+  width: 402px;
+  height: 200px;
+}
+
+.modal-form{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.heading{
+  color: #212121;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.input-container{
+  width: 272px;
+  display: flex;
+  flex-direction: column;
+}
+
+.description-container{
+  margin-top: 33px;
+  width: 568px;
+}
+
+.title-input, .category-input{
+  height: 48px;
+  border-radius: 8px;
+  padding: 12px;
+  background-color: #EEEEEE;
+}
+
+.description-input{
+  height: 152px;
+  padding: 12px;
+  background-color: #EEEEEE;
+  border-radius: 8px;
+}
+
+.title-input:focus, .description-input:focus{
+  outline: none;
+  border:  1px solid #42A5F5;
+}
+
+.button-container{
+  align-self: self-end;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px
+}
+
+.add-button{
+  background-color: #42a5f5;
+  width: 64px;
+  height: 44px;
+  border-radius: 56px;
+  color: white;
+}
+
+.add-button:hover{
+  background-color: #2196F3;
+}
+
+.delete-button{
+  background-color: #EF5350;
+  width: 84px;
+  height: 44px;
+  border-radius: 56px;
+  color: white;
+}
+
+.delete-button:hover{
+  background-color: #F44336;
+}
+
+.cancel-button{
+  width: 88px;
+  height: 44px;
+  color: #757575;
+  font-weight: 600;
+  font-size: medium;
+  letter-spacing: 1px;
+}
+
+.cancel-button:hover{
+  color: #212121;
+}
+
+
+/* css for task card */
+.custom-card {
+  margin-top: 20px;
+  margin-bottom: 16px;
+  padding: 16px;
+  width: 403px;
+  height: 248px;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.custom-card .flex {
+  justify-content: space-between;
+}
+
+.category-badge {
+  width: 83px;
+  height: 36px;
+  background-color: #B39DDB;
+  color: #4527A0;
+  font-size: 16px;
+  letter-spacing: 1.25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 24px;
+}
+
+.flex .checkbox-form {
+  width: 25px;
+}
+
+.checkbox-input {
+  accent-color: #212121;
+  opacity: 36%;
+}
+
+.edit-button,
+.delete-bin {
+  cursor: pointer;
+}
+
+.task-title {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.25px;
+}
+
+.task-description {
+  font-size: 16px;
+  color: #424242;
+  opacity: 87%;
+  letter-spacing: 0.5px;
+}
+
+.task-date {
+  text-align: right;
+  font-style: normal;
+  color: #424242;
+  opacity: 60%;
+  font-size: 14px;
+  letter-spacing: 0.25px;
+}

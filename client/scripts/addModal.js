@@ -22,13 +22,13 @@ categoryLabel.textContent = 'category'
 const categorySelect = document.createElement('select')
 categorySelect.classList.add('category-input')
 const option1 = document.createElement('option');
-option1.value = 'personal';
+option1.value = 'Personal';
 option1.innerHTML = 'Personal';
 const option2 = document.createElement('option');
-option2.value = 'home';
+option2.value = 'Home';
 option2.innerHTML = 'Home';
 const option3 = document.createElement('option');
-option3.value = 'business';
+option3.value = 'Business';
 option3.innerHTML = 'Business';
 categorySelect.append(option1, option2, option3)
 categoryContainer.append(categoryLabel, categorySelect)

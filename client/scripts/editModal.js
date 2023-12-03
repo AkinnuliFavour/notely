@@ -11,15 +11,20 @@ const editButton = document.querySelector('.edit-button');
 const editBackdrop = document.createElement('div');
 editBackdrop.classList.add('backdrop')
 
+const editInput = document.createElement('input')
+
+const editSelect = document.createElement('select')
+
+const editDescriptionInput = document.createElement('textarea');
+
 const createEditInput = (text, inputClass) => {
     const div = document.createElement('div')
     div.classList.add('input-container')
     const label = document.createElement('label')
     label.textContent = text
-    const input = document.createElement('input')
-    input.classList.add(inputClass)
-    input.placeholder = 'Add Title'
-    div.append(label, input)
+    editInput.classList.add(inputClass)
+    editInput.placeholder = 'Add Title'
+    div.append(label, editInput)
     return div
 }
 
@@ -28,8 +33,7 @@ const createEditSelect = (text, inputClass, divClass, choice1, choice2, choice3)
     div.classList.add(divClass)
     const label = document.createElement('label')
     label.textContent = text
-    const select = document.createElement('select')
-    select.classList.add(inputClass)
+    editSelect.classList.add(inputClass)
     const option1 = document.createElement('option');
     option1.value = choice1;
     option1.innerHTML = choice1;
@@ -39,12 +43,12 @@ const createEditSelect = (text, inputClass, divClass, choice1, choice2, choice3)
     const option3 = document.createElement('option');
     option3.value = choice3;
     option3.innerHTML = choice3;
-    select.append(option1, option2, option3)
-    div.append(label, select)
+    editSelect.append(option1, option2, option3)
+    div.append(label, editSelect)
     return div
 }
 
-const createEditButtons = () => {
+const createEditButtons = (id) => {
     const div = document.createElement('div')
     div.classList.add('button-container')
     const cancelButton = document.createElement('button')
@@ -56,15 +60,30 @@ const createEditButtons = () => {
     })
     const editButton = document.createElement('button')
     editButton.textContent = 'Edit'
-    editButton.classList.add('add-button')
-    editButton.addEventListener('click', updateNote)
+    editButton.classList.add('edit')
+    editButton.addEventListener('click', () => {
+        console.log(id)
+        updateNote(
+            {
+                id,  
+                title: editInput.value,
+                category: editSelect.value,
+                description: editDescriptionInput.value,
+                completed: false 
+            }
+        )
+        editBackdrop.innerHTML = '';
+        body.removeChild(editBackdrop)
+        location.reload()
+    })
 
     div.append(cancelButton, editButton)
 
     return div
 }
 
-const createEditModal = () => {
+const createEditModal = (id) => {
+    console.log(id)
     const section = document.createElement('section');
     section.classList.add('modal')
     const heading = document.createElement('p');
@@ -78,13 +97,12 @@ const createEditModal = () => {
     descriptionContainer.classList.add('input-container', 'description-container')
     const descriptionLabel = document.createElement('label');
     descriptionLabel.textContent = 'Description(optional)';
-    const descriptionInput = document.createElement('textarea');
-    descriptionInput.classList.add('description-input')
-    descriptionInput.placeholder = 'Add description'
+    editDescriptionInput.classList.add('description-input')
+    editDescriptionInput.placeholder = 'Add description'
     
-    descriptionContainer.append(descriptionLabel, descriptionInput)
+    descriptionContainer.append(descriptionLabel, editDescriptionInput)
 
-    const buttonContainer = createEditButtons()
+    const buttonContainer = createEditButtons(id)
 
 
 
@@ -96,6 +114,7 @@ const createEditModal = () => {
 }
 
 const displayEditModal = async () => {
+    let noteCard = []
     try {
         const response = await fetch(apiUrl)
 
@@ -110,12 +129,22 @@ const displayEditModal = async () => {
         const notes = await response.json()
 
         notes.map(note =>{
-            // Call the function to generate the card
-            const noteCard = document.getElementById(note._id)
+            // get notes from dom and add them to the noteCard array
+            noteCard.push(document.getElementById(note._id))
             console.log(noteCard)
-        } 
+            
+        })
 
-        )
+        // map over noteCard array and add an event listener to each delete bin
+        noteCard.map(note => {
+            document.addEventListener("click", (e) => {
+                const target = e.target.closest('.edit-button')
+                if(target){
+                    console.log(target)
+                    target.addEventListener('click', createEditModal(note.id))
+                }
+            })
+        })
 
         return response
 
@@ -126,13 +155,3 @@ const displayEditModal = async () => {
 }
 
 displayEditModal()
-
-
-window.addEventListener("DOMContentLoaded", (event) => {
-    const editButton = document.querySelector('.edit-button');
-    if (editButton) {
-    //   editButton.addEventListener('click', swapper, false);
-
-    editButton.addEventListener('click', console.log('hello'))
-    }
-});

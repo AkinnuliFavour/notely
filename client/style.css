@@ -79,7 +79,7 @@
   gap: 18px
 }
 
-.add-button{
+.add-button, .edit{
   background-color: #42a5f5;
   width: 64px;
   height: 44px;
@@ -87,7 +87,7 @@
   color: white;
 }
 
-.add-button:hover{
+.add-button:hover, .edit:hover{
   background-color: #2196F3;
 }
 

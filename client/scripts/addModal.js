@@ -114,8 +114,8 @@ document.addEventListener("click", (e) => {
             category: categorySelect.value,
             description: descriptionInput.value
         })
-        titleInput.value = ''
-        categorySelect.value = ''
-        descriptionInput.value = ''
+        backdrop.innerHTML = '';
+        body.removeChild(backdrop)
+        location.reload()
     }
 })

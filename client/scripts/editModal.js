@@ -137,7 +137,8 @@ const displayEditModal = async () => {
 
         // map over noteCard array and add an event listener to each delete bin
         noteCard.map(note => {
-            document.addEventListener("click", (e) => {
+            const editButton = note.querySelector('.edit-button')
+            editButton.addEventListener("click", (e) => {
                 const target = e.target.closest('.edit-button')
                 if(target){
                     console.log(target)

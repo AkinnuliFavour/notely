@@ -71,11 +71,12 @@ const displayDeleteModal = async () => {
 
         // map over noteCard array and add an event listener to each delete bin
         noteCard.map(note => {
-            document.addEventListener("click", (e) => {
+            const deleteBin = note.querySelector('.delete-bin')
+            deleteBin.addEventListener("click", (e) => {
                 const target = e.target.closest('.delete-bin')
-                if(target){
-                    target.addEventListener('click', createDeleteModal(note.id))
-                }   
+                    if(target){
+                        target.addEventListener('click', createDeleteModal(note.id))
+                    }   
             })
             // deleteBin.addEventListener('click', createDeleteModal(note.id))
         })

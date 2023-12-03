@@ -95,6 +95,39 @@ const createEditModal = () => {
     body.append(editBackdrop)
 }
 
+const displayEditModal = async () => {
+    try {
+        const response = await fetch(apiUrl)
+
+        if(response.status == 404){
+            console.log(response.statusText)
+        }
+
+        if(!response.ok){
+            throw new Error(`Failed to fetch data. Status: ${response.status}`)
+        }
+
+        const notes = await response.json()
+
+        notes.map(note =>{
+            // Call the function to generate the card
+            const noteCard = document.getElementById(note._id)
+            console.log(noteCard)
+        } 
+
+        )
+
+        return response
+
+        
+    } catch (error) {
+        console.error(error.message)
+    }
+}
+
+displayEditModal()
+
+
 window.addEventListener("DOMContentLoaded", (event) => {
     const editButton = document.querySelector('.edit-button');
     if (editButton) {

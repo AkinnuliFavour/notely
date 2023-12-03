@@ -35,7 +35,7 @@ return cardDiv
 }
   
 
-const fetchNotes = async() => {
+const displayNotes = async() => {
     try {
         const response = await fetch(apiUrl)
 
@@ -52,13 +52,14 @@ const fetchNotes = async() => {
         notes.map(note =>{
             // Call the function to generate the card
             const card = generateCard(note._id, note.title, note.category, note.description)
-            const editButton = card.querySelector('.edit-button')
-            console.log(card)
-            editButton.addEventListener('click', createEditModal)
-            const deleteBin = card.querySelector('.delete-bin')
-            console.log(deleteBin)
+           
+            // console.log(card)
+            // editButton.addEventListener('click', createEditModal)
+            // const deleteBin = card.querySelector('.delete-bin')
+            // console.log(deleteBin)
             
-            deleteBin.addEventListener('click', createDeleteModal)
+            // deleteBin.addEventListener('click', createDeleteModal)
+            // console.log(card)
         } 
 
         )
@@ -67,7 +68,9 @@ const fetchNotes = async() => {
     } catch (error) {
         console.error(error.message)
     }
+
 }
+
 
 const updateNote = async(data) => {
     try {
@@ -114,4 +117,4 @@ const deleteNote = async(data) => {
     }
 }
 
-fetchNotes()
+displayNotes()

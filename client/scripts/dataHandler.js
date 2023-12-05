@@ -1,10 +1,14 @@
+const apiUrl = 'http://localhost:3500/notes'
+
 const cardContainer = document.querySelector('.card-container')
+
+const allButton = document.querySelector('ul > li:nth-child(1) > button')
 
 const personalButton = document.querySelector('ul > li:nth-child(2) > button')
 
-console.log(personalButton)
+const homeButton = document.querySelector('ul > li:nth-child(3) > button')
 
-const apiUrl = 'http://localhost:3500/notes'
+const businessButton = document.querySelector('ul > li:nth-child(4) > button')
 
 let notesArray = []
 
@@ -35,7 +39,9 @@ cardContainer.appendChild(cardDiv);
 }
   
 
-const displayNotes = async() => {
+const displayAllNotes = async() => {
+    let noteCard = []
+    cardContainer.innerHTML = ''
     try {
         const response = await fetch(apiUrl)
 
@@ -52,17 +58,30 @@ const displayNotes = async() => {
         notes.map(note =>{
             // Call the function to generate the card
             const card = generateCard(note._id, note.title, note.category, note.description, note.completed)
-           
-            // console.log(card)
-            // editButton.addEventListener('click', createEditModal)
-            // const deleteBin = card.querySelector('.delete-bin')
-            // console.log(deleteBin)
-            
-            // deleteBin.addEventListener('click', createDeleteModal)
-            // console.log(card)
-        } 
 
-        )
+            noteCard.push(document.getElementById(note._id))
+        })
+
+        noteCard.map(note => {
+            const deleteBin = note.querySelector('.delete-bin')
+            deleteBin.addEventListener("click", (e) => {
+                const target = e.target.closest('.delete-bin')
+                    if(target){
+                        target.addEventListener('click', createDeleteModal(note.id))
+                    }   
+            })
+
+            const editButton = note.querySelector('.edit-button')
+            editButton.addEventListener("click", (e) => {
+                const target = e.target.closest('.edit-button')
+                if(target){
+                    console.log(target)
+                    target.addEventListener('click', createEditModal(note.id))
+                }
+            })
+
+            // deleteBin.addEventListener('click', createDeleteModal(note.id))
+        })
 
         
     } catch (error) {
@@ -72,6 +91,7 @@ const displayNotes = async() => {
 }
 
 const displayPersonalNotes = async() => {
+    let noteCard = []
     console.log('clicked!')
     cardContainer.innerHTML = ''
     try {
@@ -95,6 +115,141 @@ const displayPersonalNotes = async() => {
             console.log(personalNote)
             // Call the function to generate the card
             generateCard(personalNote._id, personalNote.title, personalNote.category, personalNote.description, personalNote.completed)
+
+            noteCard.push(document.getElementById(personalNote._id))
+        })
+
+        noteCard.map(note => {
+            const deleteBin = note.querySelector('.delete-bin')
+            deleteBin.addEventListener("click", (e) => {
+                const target = e.target.closest('.delete-bin')
+                    if(target){
+                        target.addEventListener('click', createDeleteModal(note.id))
+                    }   
+            })
+
+            const editButton = note.querySelector('.edit-button')
+            editButton.addEventListener("click", (e) => {
+                const target = e.target.closest('.edit-button')
+                if(target){
+                    console.log(target)
+                    target.addEventListener('click', createEditModal(note.id))
+                }
+            })
+            // deleteBin.addEventListener('click', createDeleteModal(note.id))
+        })
+
+        
+    } catch (error) {
+        console.error(error.message)
+    }
+}
+
+const displayHomeNotes = async() => {
+    let noteCard = []
+    console.log('clicked!')
+    cardContainer.innerHTML = ''
+    try {
+        const response = await fetch(apiUrl)
+
+        if(response.status == 404){
+            console.log(response.statusText)
+        }
+
+        if(!response.ok){
+            throw new Error(`Failed to fetch data. Status: ${response.status}`)
+        }
+
+        const notes = await response.json()
+
+        const homeNotes = notes.filter(note => note.category === 'Home')    
+
+        console.log(notes)
+        
+        homeNotes.map(homeNote => {
+            console.log(homeNote)
+            // Call the function to generate the card
+            generateCard(homeNote._id, homeNote.title, homeNote.category, homeNote.description, homeNote.completed)
+
+            noteCard.push(document.getElementById(homeNote._id))
+        })
+
+        console.log(noteCard)
+
+        noteCard.map(note => {
+            const deleteBin = note.querySelector('.delete-bin')
+            deleteBin.addEventListener("click", (e) => {
+                const target = e.target.closest('.delete-bin')
+                    if(target){
+                        target.addEventListener('click', createDeleteModal(note.id))
+                    }   
+            })
+
+            const editButton = note.querySelector('.edit-button')
+            editButton.addEventListener("click", (e) => {
+                const target = e.target.closest('.edit-button')
+                if(target){
+                    console.log(target)
+                    target.addEventListener('click', createEditModal(note.id))
+                }
+            })
+
+            // deleteBin.addEventListener('click', createDeleteModal(note.id))
+        })
+
+    } catch (error) {
+        console.error(error.message)
+    }
+}
+
+const displayBusinessNotes = async() => {
+    let noteCard = []
+    console.log('clicked!')
+    cardContainer.innerHTML = ''
+    try {
+        const response = await fetch(apiUrl)
+
+        if(response.status == 404){
+            console.log(response.statusText)
+        }
+
+        if(!response.ok){
+            throw new Error(`Failed to fetch data. Status: ${response.status}`)
+        }
+
+        const notes = await response.json()
+
+        const businessNotes = notes.filter(note => note.category === 'Business')    
+
+        console.log(notes)
+        
+        businessNotes.map(businessNote => {
+            console.log(businessNote)
+            // Call the function to generate the card
+            generateCard(businessNote._id, businessNote.title, businessNote.category, businessNote.description, businessNote.completed)
+
+            noteCard.push(document.getElementById(businessNote._id))
+        })
+
+        // map over noteCard array and add an event listener to each delete bin
+        noteCard.map(note => {
+            const deleteBin = note.querySelector('.delete-bin')
+            deleteBin.addEventListener("click", (e) => {
+                const target = e.target.closest('.delete-bin')
+                    if(target){
+                        target.addEventListener('click', createDeleteModal(note.id))
+                    }   
+            })
+
+            const editButton = note.querySelector('.edit-button')
+            editButton.addEventListener("click", (e) => {
+                const target = e.target.closest('.edit-button')
+                if(target){
+                    console.log(target)
+                    target.addEventListener('click', createEditModal(note.id))
+                }
+            })
+            // deleteBin.addEventListener('click', createDeleteModal(note.id))
         })
 
         
@@ -149,6 +304,12 @@ const deleteNote = async(data) => {
     }
 }
 
-displayNotes()
+displayAllNotes()
+
+allButton.addEventListener('click', displayAllNotes)
 
 personalButton.addEventListener('click', displayPersonalNotes)
+
+homeButton.addEventListener('click', displayHomeNotes)
+
+businessButton.addEventListener('click', displayBusinessNotes)

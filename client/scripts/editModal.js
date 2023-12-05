@@ -1,13 +1,5 @@
 const editButton = document.querySelector('.edit-button');
 
-// window.addEventListener("DOMContentLoaded", (event) => {
-//     const editButton = document.querySelector('.edit-button');
-//     if (editButton) {
-//     //   editButton.addEventListener('click', swapper, false);
-//     console.log(editButton)
-//     }
-// });
-
 const editBackdrop = document.createElement('div');
 editBackdrop.classList.add('backdrop')
 
@@ -112,46 +104,3 @@ const createEditModal = (id) => {
 
     body.append(editBackdrop)
 }
-
-const displayEditModal = async () => {
-    let noteCard = []
-    try {
-        const response = await fetch(apiUrl)
-
-        if(response.status == 404){
-            console.log(response.statusText)
-        }
-
-        if(!response.ok){
-            throw new Error(`Failed to fetch data. Status: ${response.status}`)
-        }
-
-        const notes = await response.json()
-
-        notes.map(note =>{
-            // get notes from dom and add them to the noteCard array
-            noteCard.push(document.getElementById(note._id))
-            console.log(noteCard)
-        })
-
-        // map over noteCard array and add an event listener to each delete bin
-        noteCard.map(note => {
-            const editButton = note.querySelector('.edit-button')
-            editButton.addEventListener("click", (e) => {
-                const target = e.target.closest('.edit-button')
-                if(target){
-                    console.log(target)
-                    target.addEventListener('click', createEditModal(note.id))
-                }
-            })
-        })
-
-        return response
-
-        
-    } catch (error) {
-        console.error(error.message)
-    }
-}
-
-displayEditModal()

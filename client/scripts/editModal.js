@@ -65,7 +65,7 @@ const createEditButtons = (id) => {
         )
         editBackdrop.innerHTML = '';
         body.removeChild(editBackdrop)
-        location.reload()
+        // location.reload()
     })
 
     div.append(cancelButton, editButton)

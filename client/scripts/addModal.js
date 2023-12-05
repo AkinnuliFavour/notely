@@ -122,31 +122,18 @@ const createNewNote = async(data) => {
 }
 
 // Attach an event listener to the add button on the add note modal
-addButton.addEventListener("click", (e) => {
-    const target = e.target.closest('.add-button')
-
-    if(target){
-        console.log('hi')
-        createNewNote({
-            title: titleInput.value,
-            category: categorySelect.value,
-            description: descriptionInput.value
-        })
-        backdrop.innerHTML = '';
-        body.removeChild(backdrop)
-    }
-    displayAllNotes()
-})
-
-// const addButton = document.querySelector('.add-button')
-// addButton.addEventListener('click', () => {
-//     createNewNote({
-//         title: titleInput.value,
-//         category: categorySelect.value,
-//         description: descriptionInput.value
-//     })
-//     backdrop.innerHTML = '';
-//     body.removeChild(backdrop)
-//     location.refresh()
-// })
-
+    addButton.addEventListener("click", async(e) => {
+        const target = e.target.closest('.add-button')
+    
+        if(target){
+            console.log('hi')
+            const newNote = await createNewNote({
+                title: titleInput.value,
+                category: categorySelect.value,
+                description: descriptionInput.value
+            })
+            backdrop.innerHTML = '';
+            body.removeChild(backdrop)
+            await location.reload()
+        }
+    })

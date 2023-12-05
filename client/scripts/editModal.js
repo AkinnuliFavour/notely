@@ -53,8 +53,8 @@ const createEditButtons = (id) => {
     const editButton = document.createElement('button')
     editButton.textContent = 'Edit'
     editButton.classList.add('edit')
-    editButton.addEventListener('click', () => {
-        updateNote(
+    editButton.addEventListener('click', async() => {
+       await updateNote(
             {
                 id,  
                 title: editInput.value,
@@ -65,7 +65,7 @@ const createEditButtons = (id) => {
         )
         editBackdrop.innerHTML = '';
         body.removeChild(editBackdrop)
-        location.reload()
+        await location.reload()
     })
 
     div.append(cancelButton, editButton)

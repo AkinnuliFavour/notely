@@ -16,11 +16,11 @@ const createDeleteModalButtons = (id) => {
     const deleteButton = document.createElement('button')
     deleteButton.textContent = 'Delete'
     deleteButton.classList.add('delete-button')
-    deleteButton.addEventListener('click', () => {
-        deleteNote({ id })
+    deleteButton.addEventListener('click', async() => {
+        await deleteNote({ id })
         deleteBackdrop.innerHTML = '';
         body.removeChild(deleteBackdrop)
-        location.reload()
+        await location.reload()
     })
     div.append(cancelButton, deleteButton)
 

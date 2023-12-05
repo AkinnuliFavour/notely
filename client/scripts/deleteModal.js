@@ -20,7 +20,7 @@ const createDeleteModalButtons = (id) => {
         deleteNote({ id })
         deleteBackdrop.innerHTML = '';
         body.removeChild(deleteBackdrop)
-        // location.reload()
+        location.reload()
     })
     div.append(cancelButton, deleteButton)
 

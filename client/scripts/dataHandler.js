@@ -43,7 +43,7 @@ const displayAllNotes = async() => {
     let noteCard = []
     cardContainer.innerHTML = ''
     try {
-        const response = await fetch(apiUrl)
+        const response = await fetch(apiUrl, headers)
 
         if(response.status == 404){
             console.log(response.statusText)

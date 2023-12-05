@@ -103,7 +103,10 @@ const createNewNote = async(data) => {
           }
 
         const note = await response.json()
+
         return note
+
+        location.refresh()
 
     } catch (error) {
         console.error(error)
@@ -123,8 +126,7 @@ document.addEventListener("click", (e) => {
         })
         backdrop.innerHTML = '';
         body.removeChild(backdrop)
+        
     }
-
-    location.reload()
 })
 

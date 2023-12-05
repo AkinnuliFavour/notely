@@ -135,7 +135,6 @@ addButton.addEventListener("click", (e) => {
         backdrop.innerHTML = '';
         body.removeChild(backdrop)
     }
-    location.reload()
     displayAllNotes()
 })
 

@@ -19,6 +19,10 @@ app.use(cors(corsOptions))
 
 app.use(express.json())
 
+app.get('/', (req, res) => {
+    res.send('Hey this is my API running 🥳')
+  })
+
 app.use('/notes', require('./routes/notesRoute'))
 
 app.all('*', (req, res) => {

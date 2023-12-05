@@ -184,3 +184,9 @@
   font-size: 14px;
   letter-spacing: 0.25px;
 }
+
+@media (max-width: 500px) {
+  .custom-card{
+    width: 100%;
+  }
+}

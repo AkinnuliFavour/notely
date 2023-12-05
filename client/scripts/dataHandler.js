@@ -13,7 +13,7 @@ const businessButton = document.querySelector('ul > li:nth-child(4) > button')
 let notesArray = []
 
 // Create a function to generate the HTML code for the card
-function generateCard(id, title, category, description, completed) {
+function generateCard(id, title, category, description, completed, date) {
 // Create the main div element for the card
 const cardDiv = document.createElement('div');
 cardDiv.classList.add('custom-card');
@@ -30,7 +30,7 @@ cardDiv.innerHTML = `
     </div>
     <p class="task-title">${title}</p>
     <p class="task-description">${description}</p>
-    <p class="task-date">22.01.2023</p>
+    <p class="task-date">${date}</p>
 `;
 
 // Append the generated card to the body or any other container element
@@ -57,7 +57,10 @@ const displayAllNotes = async() => {
 
         notes.map(note =>{
             // Call the function to generate the card
-            const card = generateCard(note._id, note.title, note.category, note.description, note.completed)
+            const date = new Date(note.createdAt)
+            const creationDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
+            console.log(creationDate)
+            const card = generateCard(note._id, note.title, note.category, note.description, note.completed, creationDate)
 
             noteCard.push(document.getElementById(note._id))
         })
@@ -113,8 +116,10 @@ const displayPersonalNotes = async() => {
         
         personalNotes.map(personalNote => {
             console.log(personalNote)
+            const date = new Date(personalNote.createdAt)
+            const creationDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
             // Call the function to generate the card
-            generateCard(personalNote._id, personalNote.title, personalNote.category, personalNote.description, personalNote.completed)
+            generateCard(personalNote._id, personalNote.title, personalNote.category, personalNote.description, personalNote.completed, creationDate)
 
             noteCard.push(document.getElementById(personalNote._id))
         })
@@ -168,8 +173,10 @@ const displayHomeNotes = async() => {
         
         homeNotes.map(homeNote => {
             console.log(homeNote)
+            const date = new Date(homeNote.createdAt)
+            const creationDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
             // Call the function to generate the card
-            generateCard(homeNote._id, homeNote.title, homeNote.category, homeNote.description, homeNote.completed)
+            generateCard(homeNote._id, homeNote.title, homeNote.category, homeNote.description, homeNote.completed, creationDate)
 
             noteCard.push(document.getElementById(homeNote._id))
         })
@@ -225,8 +232,10 @@ const displayBusinessNotes = async() => {
         
         businessNotes.map(businessNote => {
             console.log(businessNote)
+            const date = new Date(businessNote.createdAt)
+            const creationDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
             // Call the function to generate the card
-            generateCard(businessNote._id, businessNote.title, businessNote.category, businessNote.description, businessNote.completed)
+            generateCard(businessNote._id, businessNote.title, businessNote.category, businessNote.description, businessNote.completed, creationDate)
 
             noteCard.push(document.getElementById(businessNote._id))
         })

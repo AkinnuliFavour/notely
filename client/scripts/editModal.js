@@ -132,7 +132,6 @@ const displayEditModal = async () => {
             // get notes from dom and add them to the noteCard array
             noteCard.push(document.getElementById(note._id))
             console.log(noteCard)
-            
         })
 
         // map over noteCard array and add an event listener to each delete bin

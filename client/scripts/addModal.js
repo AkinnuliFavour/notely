@@ -132,10 +132,9 @@ document.addEventListener("click", (e) => {
             category: categorySelect.value,
             description: descriptionInput.value
         })
-        location.refresh()
-        // backdrop.innerHTML = '';
-        // body.removeChild(backdrop)
-        
+        backdrop.innerHTML = '';
+        body.removeChild(backdrop)
+        location.reload()
     }
 })
 

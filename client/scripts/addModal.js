@@ -123,7 +123,8 @@ document.addEventListener("click", (e) => {
         })
         backdrop.innerHTML = '';
         body.removeChild(backdrop)
-        location.reload()
     }
+
+    location.reload()
 })
 

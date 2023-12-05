@@ -134,8 +134,8 @@ document.addEventListener("click", (e) => {
         })
         backdrop.innerHTML = '';
         body.removeChild(backdrop)
-        displayAllNotes()
     }
+    displayAllNotes()
 })
 
 // const addButton = document.querySelector('.add-button')

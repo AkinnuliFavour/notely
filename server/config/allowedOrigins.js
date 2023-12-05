@@ -1,5 +1,5 @@
 const allowedOrigins = [
-    'https://notely.com',
+   ' https://notely-frontend.vercel.app/',
     'http://localhost:5500'
 ]
 

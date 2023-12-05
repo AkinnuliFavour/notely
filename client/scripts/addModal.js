@@ -122,7 +122,7 @@ const createNewNote = async(data) => {
 }
 
 // Attach an event listener to the add button on the add note modal
-document.addEventListener("click", (e) => {
+addButton.addEventListener("click", (e) => {
     const target = e.target.closest('.add-button')
 
     if(target){
@@ -135,6 +135,7 @@ document.addEventListener("click", (e) => {
         backdrop.innerHTML = '';
         body.removeChild(backdrop)
     }
+    location.reload()
     displayAllNotes()
 })
 

@@ -17,7 +17,6 @@ const createDeleteModalButtons = (id) => {
     deleteButton.textContent = 'Delete'
     deleteButton.classList.add('delete-button')
     deleteButton.addEventListener('click', () => {
-        console.log(id)
         deleteNote({ id })
         deleteBackdrop.innerHTML = '';
         body.removeChild(deleteBackdrop)
@@ -30,7 +29,6 @@ const createDeleteModalButtons = (id) => {
 
 
 const createDeleteModal = (id) => {
-    console.log(id)
     const section = document.createElement('section');
     section.classList.add('delete-modal')
     const heading = document.createElement('p');

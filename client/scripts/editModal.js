@@ -54,7 +54,6 @@ const createEditButtons = (id) => {
     editButton.textContent = 'Edit'
     editButton.classList.add('edit')
     editButton.addEventListener('click', () => {
-        console.log(id)
         updateNote(
             {
                 id,  
@@ -75,7 +74,6 @@ const createEditButtons = (id) => {
 }
 
 const createEditModal = (id) => {
-    console.log(id)
     const section = document.createElement('section');
     section.classList.add('modal')
     const heading = document.createElement('p');

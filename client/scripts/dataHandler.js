@@ -59,7 +59,6 @@ const displayAllNotes = async() => {
             // Call the function to generate the card
             const date = new Date(note.createdAt)
             const creationDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
-            console.log(creationDate)
             const card = generateCard(note._id, note.title, note.category, note.description, note.completed, creationDate)
 
             noteCard.push(document.getElementById(note._id))
@@ -78,7 +77,6 @@ const displayAllNotes = async() => {
             editButton.addEventListener("click", (e) => {
                 const target = e.target.closest('.edit-button')
                 if(target){
-                    console.log(target)
                     target.addEventListener('click', createEditModal(note.id))
                 }
             })
@@ -95,7 +93,6 @@ const displayAllNotes = async() => {
 
 const displayPersonalNotes = async() => {
     let noteCard = []
-    console.log('clicked!')
     cardContainer.innerHTML = ''
     try {
         const response = await fetch(apiUrl)
@@ -111,11 +108,8 @@ const displayPersonalNotes = async() => {
         const notes = await response.json()
 
         const personalNotes = notes.filter(note => note.category === 'Personal')    
-
-        console.log(notes)
         
         personalNotes.map(personalNote => {
-            console.log(personalNote)
             const date = new Date(personalNote.createdAt)
             const creationDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
             // Call the function to generate the card
@@ -137,7 +131,6 @@ const displayPersonalNotes = async() => {
             editButton.addEventListener("click", (e) => {
                 const target = e.target.closest('.edit-button')
                 if(target){
-                    console.log(target)
                     target.addEventListener('click', createEditModal(note.id))
                 }
             })
@@ -152,7 +145,6 @@ const displayPersonalNotes = async() => {
 
 const displayHomeNotes = async() => {
     let noteCard = []
-    console.log('clicked!')
     cardContainer.innerHTML = ''
     try {
         const response = await fetch(apiUrl)
@@ -168,11 +160,8 @@ const displayHomeNotes = async() => {
         const notes = await response.json()
 
         const homeNotes = notes.filter(note => note.category === 'Home')    
-
-        console.log(notes)
         
         homeNotes.map(homeNote => {
-            console.log(homeNote)
             const date = new Date(homeNote.createdAt)
             const creationDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
             // Call the function to generate the card
@@ -180,8 +169,6 @@ const displayHomeNotes = async() => {
 
             noteCard.push(document.getElementById(homeNote._id))
         })
-
-        console.log(noteCard)
 
         noteCard.map(note => {
             const deleteBin = note.querySelector('.delete-bin')
@@ -196,7 +183,6 @@ const displayHomeNotes = async() => {
             editButton.addEventListener("click", (e) => {
                 const target = e.target.closest('.edit-button')
                 if(target){
-                    console.log(target)
                     target.addEventListener('click', createEditModal(note.id))
                 }
             })
@@ -211,7 +197,6 @@ const displayHomeNotes = async() => {
 
 const displayBusinessNotes = async() => {
     let noteCard = []
-    console.log('clicked!')
     cardContainer.innerHTML = ''
     try {
         const response = await fetch(apiUrl)
@@ -227,11 +212,8 @@ const displayBusinessNotes = async() => {
         const notes = await response.json()
 
         const businessNotes = notes.filter(note => note.category === 'Business')    
-
-        console.log(notes)
         
         businessNotes.map(businessNote => {
-            console.log(businessNote)
             const date = new Date(businessNote.createdAt)
             const creationDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
             // Call the function to generate the card
@@ -254,7 +236,6 @@ const displayBusinessNotes = async() => {
             editButton.addEventListener("click", (e) => {
                 const target = e.target.closest('.edit-button')
                 if(target){
-                    console.log(target)
                     target.addEventListener('click', createEditModal(note.id))
                 }
             })
@@ -283,7 +264,7 @@ const updateNote = async(data) => {
         }
 
         const note = await response.json()
-        console.log(note)
+
         return note
 
     } catch (error) {
@@ -306,7 +287,7 @@ const deleteNote = async(data) => {
         }
 
         const note = await response.json()
-        console.log(note)
+
         return note
     } catch (error) {
         console.error(error)

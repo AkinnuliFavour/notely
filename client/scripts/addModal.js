@@ -51,6 +51,16 @@ cancelButton.addEventListener('click', () => {
 const addButton = document.createElement('button')
 addButton.textContent = 'Add'
 addButton.classList.add('add-button')
+addButton.querySelector('click', () => {
+    createNewNote({
+        title: titleInput.value,
+        category: categorySelect.value,
+        description: descriptionInput.value
+    })
+    backdrop.innerHTML = '';
+    body.removeChild(backdrop)
+    location.refresh()
+})
 buttonContainer.append(cancelButton, addButton)
 
 // create description input field
@@ -129,15 +139,15 @@ const createNewNote = async(data) => {
 //     }
 // })
 
-const addButton = document.querySelector('.add-button')
-addButton.addEventListener('click', () => {
-    createNewNote({
-        title: titleInput.value,
-        category: categorySelect.value,
-        description: descriptionInput.value
-    })
-    backdrop.innerHTML = '';
-    body.removeChild(backdrop)
-    location.refresh()
-})
+// const addButton = document.querySelector('.add-button')
+// addButton.addEventListener('click', () => {
+//     createNewNote({
+//         title: titleInput.value,
+//         category: categorySelect.value,
+//         description: descriptionInput.value
+//     })
+//     backdrop.innerHTML = '';
+//     body.removeChild(backdrop)
+//     location.refresh()
+// })
 

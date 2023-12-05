@@ -1,4 +1,7 @@
 const button = document.querySelector('button');
+
+const miniButton = document.querySelector('.mini-button')
+
 const body = document.querySelector('body');
 
 const backdrop = document.createElement('div');
@@ -103,6 +106,8 @@ const createModal = () => {
 
 button.addEventListener('click', createModal)
 
+miniButton.addEventListener('click', createModal)
+
 // Attach an event listener to the add button
 document.addEventListener("click", (e) => {
     const target = e.target.closest('.add-button')
@@ -119,3 +124,4 @@ document.addEventListener("click", (e) => {
         location.reload()
     }
 })
+

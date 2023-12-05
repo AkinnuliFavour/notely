@@ -189,4 +189,11 @@
   .custom-card{
     width: 100%;
   }
+  .modal{
+      width: 400px;
+      height: 550px;
+  }
+  .input-container{
+      width: 100%;
+    }
 }

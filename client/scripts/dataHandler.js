@@ -21,7 +21,7 @@ cardDiv.id = id
 
 // Create the inner structure of the card using template literals
 cardDiv.innerHTML = `
-    <div class="flex justify-between">
+    <div class="flex justify-between" data-aos="fade-down">
         <p class="category-badge">${category}</p>
         <div class="flex items-center">
             <button class="edit-button"><img src="./assets/pencil.svg" alt=""></button>

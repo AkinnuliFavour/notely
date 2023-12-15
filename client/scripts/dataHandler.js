@@ -17,11 +17,12 @@ function generateCard(id, title, category, description, completed, date) {
 // Create the main div element for the card
 const cardDiv = document.createElement('div');
 cardDiv.classList.add('custom-card');
+cardDiv.setAttribute("data-aos", "fade-down")
 cardDiv.id = id
 
 // Create the inner structure of the card using template literals
 cardDiv.innerHTML = `
-    <div class="flex justify-between" data-aos="fade-down">
+    <div class="flex justify-between">
         <p class="category-badge">${category}</p>
         <div class="flex items-center">
             <button class="edit-button"><img src="./assets/pencil.svg" alt=""></button>

@@ -25,6 +25,7 @@ cardDiv.innerHTML = `
     <div class="flex justify-between">
         <p class="category-badge">${category}</p>
         <div class="flex items-center">
+            <input type="checkbox" name="" id="" class="checkbox-input">
             <button class="edit-button"><img src="./assets/pencil.svg" alt=""></button>
             <button class="delete-bin"><img src="./assets/bin.svg" alt=""></button>
         </div>
@@ -65,6 +66,7 @@ const displayAllNotes = async() => {
             noteCard.push(document.getElementById(note._id))
         })
 
+        // add event istener to each delete bin
         noteCard.map(note => {
             const deleteBin = note.querySelector('.delete-bin')
             deleteBin.addEventListener("click", (e) => {
@@ -73,7 +75,8 @@ const displayAllNotes = async() => {
                         target.addEventListener('click', createDeleteModal(note.id))
                     }   
             })
-
+            
+            // add event listener to each edit pencil
             const editButton = note.querySelector('.edit-button')
             editButton.addEventListener("click", (e) => {
                 const target = e.target.closest('.edit-button')

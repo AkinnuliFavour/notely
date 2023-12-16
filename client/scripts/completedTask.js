@@ -1,0 +1,7 @@
+const markNoteAsCompleted = () => {
+
+}
+
+const showCompletedNotes = () => {
+    
+}

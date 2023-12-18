@@ -1,5 +1,7 @@
 const apiUrl = 'https://notely-orcin.vercel.app/notes'
 
+// const apiUrl = 'http://localhost:3500/notes'
+
 const cardContainer = document.querySelector('.card-container')
 
 const allButton = document.querySelector('ul > li:nth-child(1) > button')
@@ -10,12 +12,13 @@ const homeButton = document.querySelector('ul > li:nth-child(3) > button')
 
 const businessButton = document.querySelector('ul > li:nth-child(4) > button')
 
+const showCompletedNotesCheckbox = document.querySelector('input[id = "display"]')
+
 let notesArray = []
 
 // Create a function to generate the HTML code for the card
 function generateCard(id, title, category, description, completed, date) {
 
-    console.log(completed)
 // Create the main div element for the card
 const cardDiv = document.createElement('div');
 cardDiv.classList.add('custom-card');
@@ -44,17 +47,7 @@ cardContainer.appendChild(cardDiv);
 
 const markNoteAsCompleted = async (note) => {
     const card = document.getElementById(note._id)
-    console.log(card)
-    const paragraphs = card.querySelectorAll('p')
-    const buttons = card.querySelectorAll('button')
-    const tag = card.querySelector('h3')
-    const paragraphsArray = Array.from(paragraphs)
-    const buttonsArray = Array.from(buttons)
-    console.log(paragraphs)
     if(note.completed === false){
-        // paragraphsArray.map(p => p.classList.remove('line-through'))
-        // buttonsArray.map(button => button.classList.remove('color'))
-        // tag.classList.remove('color')
         const updatedNote = {
             id: note._id,
             title: note.title,
@@ -62,7 +55,6 @@ const markNoteAsCompleted = async (note) => {
             description: note.description,
             completed: !note.completed
         }
-        console.log(note)
         try {
             const response = await fetch(apiUrl, {
                 headers: {
@@ -87,9 +79,6 @@ const markNoteAsCompleted = async (note) => {
         console.log(false)
     }
     if(note.completed === true){
-        // paragraphsArray.map(p => p.classList.add('line-through'))
-        // buttonsArray.map(button => button.classList.add('color'))
-        // tag.classList.add('color')
         const uncompletedNote = {
             id: note._id,
             title: note.title,
@@ -97,7 +86,6 @@ const markNoteAsCompleted = async (note) => {
             description: note.description,
             completed: !note.completed
         }
-        console.log(note)
         try {
             const response = await fetch(apiUrl, {
                 headers: {
@@ -114,8 +102,6 @@ const markNoteAsCompleted = async (note) => {
             await location.reload()
 
             const data = await response.json()
-    
-            console.log(data)
         }catch (error) {
             console.error(error)
         }   
@@ -179,7 +165,6 @@ const displayAllNotes = async() => {
                     })
                 } 
             })
-            // deleteBin.addEventListener('click', createDeleteModal(note.id))
         })
 
         
@@ -245,7 +230,6 @@ const displayPersonalNotes = async() => {
                     })
                 } 
             })
-            // deleteBin.addEventListener('click', createDeleteModal(note.id))
         })
 
         
@@ -310,8 +294,6 @@ const displayHomeNotes = async() => {
                     })
                 } 
             })
-
-            // deleteBin.addEventListener('click', createDeleteModal(note.id))
         })
 
     } catch (error) {
@@ -376,8 +358,71 @@ const displayBusinessNotes = async() => {
                     })
                 } 
             })
-            
-            // deleteBin.addEventListener('click', createDeleteModal(note.id))
+        })
+
+        
+    } catch (error) {
+        console.error(error.message)
+    }
+}
+
+const showCompletedNotes = async () => {
+    console.log('clicked')
+    let noteCard = []
+    cardContainer.innerHTML = ''
+    try {
+        const response = await fetch(apiUrl)
+
+        if(response.status == 404){
+            console.log(response.statusText)
+        }
+
+        if(!response.ok){
+            throw new Error(`Failed to fetch data. Status: ${response.status}`)
+        }
+
+        const notes = await response.json()
+
+        const completedNotes = notes.filter(note => note.completed === true)    
+        
+        completedNotes.map(completedNote => {
+            const date = new Date(completedNote.createdAt)
+            const creationDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
+            // Call the function to generate the card
+            generateCard(completedNote._id, completedNote.title, completedNote.category, completedNote.description, completedNote.completed, creationDate)
+
+            noteCard.push(document.getElementById(completedNote._id))
+        })
+
+        noteCard.map(note => {
+            const deleteBin = note.querySelector('.delete-bin')
+            deleteBin.addEventListener("click", (e) => {
+                const target = e.target.closest('.delete-bin')
+                    if(target){
+                        target.addEventListener('click', createDeleteModal(note.id))
+                    }   
+            })
+
+            const editButton = note.querySelector('.edit-button')
+            editButton.addEventListener("click", (e) => {
+                const target = e.target.closest('.edit-button')
+                if(target){
+                    target.addEventListener('click', createEditModal(note.id))
+                }
+            })
+
+            // add event listener to each checkbox
+            const checkbox = note.querySelector('.checkbox-input')
+            checkbox.addEventListener("click", (e) => {
+                const target = e.target.closest('.checkbox-input')
+                if(target){
+                    target.addEventListener('change', () => {
+                        const noteData = notes.find(data => data._id === note.id)
+                        console.log(noteData)
+                        markNoteAsCompleted(noteData)
+                    })
+                } 
+            })
         })
 
         
@@ -432,6 +477,8 @@ const deleteNote = async(data) => {
     }
 }
 
+
+
 displayAllNotes()
 
 allButton.addEventListener('click', displayAllNotes)
@@ -441,3 +488,5 @@ personalButton.addEventListener('click', displayPersonalNotes)
 homeButton.addEventListener('click', displayHomeNotes)
 
 businessButton.addEventListener('click', displayBusinessNotes)
+
+showCompletedNotesCheckbox.addEventListener('click', showCompletedNotes)

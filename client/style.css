@@ -185,6 +185,18 @@
   letter-spacing: 0.25px;
 }
 
+/* style for completed notes */
+.line-through{
+ text-decoration: line-through; 
+ color: #212121;
+ opacity: 36%;
+}
+
+.color{
+  color: #212121;
+  opacity: 36%;
+}
+
 @media (max-width: 500px) {
   .custom-card{
     width: 100%;

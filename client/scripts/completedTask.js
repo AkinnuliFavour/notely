@@ -1,7 +1,6 @@
-const markNoteAsCompleted = () => {
 
-}
 
 const showCompletedNotes = () => {
     
 }
+

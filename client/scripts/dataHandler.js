@@ -1,4 +1,5 @@
-const apiUrl = 'https://notely-orcin.vercel.app/notes'
+// const apiUrl = 'https://notely-orcin.vercel.app/notes'
+const apiUrl = 'http://localhost:3500/notes'
 
 const cardContainer = document.querySelector('.card-container')
 
@@ -14,6 +15,8 @@ let notesArray = []
 
 // Create a function to generate the HTML code for the card
 function generateCard(id, title, category, description, completed, date) {
+
+    console.log(completed)
 // Create the main div element for the card
 const cardDiv = document.createElement('div');
 cardDiv.classList.add('custom-card');
@@ -23,21 +26,101 @@ cardDiv.id = id
 // Create the inner structure of the card using template literals
 cardDiv.innerHTML = `
     <div class="flex justify-between">
-        <p class="category-badge">${category}</p>
+        <h3 class="category-badge ${completed ? 'color' : null}">${category}</h3>
         <div class="flex items-center">
-            <input type="checkbox" name="" id="" class="checkbox-input">
-            <button class="edit-button"><img src="./assets/pencil.svg" alt=""></button>
-            <button class="delete-bin"><img src="./assets/bin.svg" alt=""></button>
+            <input type="checkbox" ${completed ? 'checked' : ''} name="" id="" class="checkbox-input">
+            <button class="edit-button ${completed ? 'color' : null}"><img src="./assets/pencil.svg" alt=""></button>
+            <button class="delete-bin ${completed ? 'color' : null}"><img src="./assets/bin.svg" alt=""></button>
         </div>
     </div>
-    <p class="task-title">${title}</p>
-    <p class="task-description">${description}</p>
-    <p class="task-date">${date}</p>
+    <p class="task-title ${completed ? 'line-through' : null}">${title}</p>
+    <p class="task-description ${completed ? 'line-through' : null}">${description}</p>
+    <p class="task-date ${completed ? 'line-through' : null}">${date}</p>
 `;
 
 // Append the generated card to the body or any other container element
 cardContainer.appendChild(cardDiv);
 
+}
+
+const markNoteAsCompleted = async (note) => {
+    const card = document.getElementById(note._id)
+    console.log(card)
+    const paragraphs = card.querySelectorAll('p')
+    const buttons = card.querySelectorAll('button')
+    const tag = card.querySelector('h3')
+    const paragraphsArray = Array.from(paragraphs)
+    const buttonsArray = Array.from(buttons)
+    console.log(paragraphs)
+    if(note.completed === false){
+        // paragraphsArray.map(p => p.classList.remove('line-through'))
+        // buttonsArray.map(button => button.classList.remove('color'))
+        // tag.classList.remove('color')
+        const updatedNote = {
+            id: note._id,
+            title: note.title,
+            category: note.category,
+            description: note.description,
+            completed: !note.completed
+        }
+        console.log(note)
+        try {
+            const response = await fetch(apiUrl, {
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(updatedNote),
+                method: "PATCH"
+            })
+            await location.reload()
+    
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+    
+            const data = await response.json()
+    
+            console.log(data)
+    
+        } catch (error) {
+            console.error(error)
+        }
+        console.log(false)
+    }
+    if(note.completed === true){
+        // paragraphsArray.map(p => p.classList.add('line-through'))
+        // buttonsArray.map(button => button.classList.add('color'))
+        // tag.classList.add('color')
+        const uncompletedNote = {
+            id: note._id,
+            title: note.title,
+            category: note.category,
+            description: note.description,
+            completed: !note.completed
+        }
+        console.log(note)
+        try {
+            const response = await fetch(apiUrl, {
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(uncompletedNote),
+                method: "PATCH"
+            })
+    
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+    
+            await location.reload()
+
+            const data = await response.json()
+    
+            console.log(data)
+        }catch (error) {
+            console.error(error)
+        }   
+    }
 }
   
 
@@ -85,6 +168,18 @@ const displayAllNotes = async() => {
                 }
             })
 
+            // add event listener to each checkbox
+            const checkbox = note.querySelector('.checkbox-input')
+            checkbox.addEventListener("click", (e) => {
+                const target = e.target.closest('.checkbox-input')
+                if(target){
+                    target.addEventListener('change', () => {
+                        const noteData = notes.find(data => data._id === note.id)
+                        console.log(noteData)
+                        markNoteAsCompleted(noteData)
+                    })
+                } 
+            })
             // deleteBin.addEventListener('click', createDeleteModal(note.id))
         })
 
@@ -137,6 +232,19 @@ const displayPersonalNotes = async() => {
                 if(target){
                     target.addEventListener('click', createEditModal(note.id))
                 }
+            })
+
+            // add event listener to each checkbox
+            const checkbox = note.querySelector('.checkbox-input')
+            checkbox.addEventListener("click", (e) => {
+                const target = e.target.closest('.checkbox-input')
+                if(target){
+                    target.addEventListener('change', () => {
+                        const noteData = notes.find(data => data._id === note.id)
+                        console.log(noteData)
+                        markNoteAsCompleted(noteData)
+                    })
+                } 
             })
             // deleteBin.addEventListener('click', createDeleteModal(note.id))
         })
@@ -191,6 +299,19 @@ const displayHomeNotes = async() => {
                 }
             })
 
+            // add event listener to each checkbox
+            const checkbox = note.querySelector('.checkbox-input')
+            checkbox.addEventListener("click", (e) => {
+                const target = e.target.closest('.checkbox-input')
+                if(target){
+                    target.addEventListener('change', () => {
+                        const noteData = notes.find(data => data._id === note.id)
+                        console.log(noteData)
+                        markNoteAsCompleted(noteData)
+                    })
+                } 
+            })
+
             // deleteBin.addEventListener('click', createDeleteModal(note.id))
         })
 
@@ -243,6 +364,20 @@ const displayBusinessNotes = async() => {
                     target.addEventListener('click', createEditModal(note.id))
                 }
             })
+
+            // add event listener to each checkbox
+            const checkbox = note.querySelector('.checkbox-input')
+            checkbox.addEventListener("click", (e) => {
+                const target = e.target.closest('.checkbox-input')
+                if(target){
+                    target.addEventListener('change', () => {
+                        const noteData = notes.find(data => data._id === note.id)
+                        console.log(noteData)
+                        markNoteAsCompleted(noteData)
+                    })
+                } 
+            })
+            
             // deleteBin.addEventListener('click', createDeleteModal(note.id))
         })
 

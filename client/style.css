@@ -218,8 +218,8 @@
       width: 100%;
   }
   .no-notetext{
-    /* position: relative;
-    top: 50%; */
+    position: relative;
+    top: 50%;
     left: 0;
   }
 }

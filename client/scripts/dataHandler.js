@@ -1,6 +1,6 @@
-// const apiUrl = 'https://notely-orcin.vercel.app/notes'
+const apiUrl = 'https://notely-orcin.vercel.app/notes'
 
-const apiUrl = 'http://localhost:3500/notes'
+// const apiUrl = 'http://localhost:3500/notes'
 
 const cardContainer = document.querySelector('.card-container')
 
@@ -125,6 +125,10 @@ const displayAllNotes = async() => {
 
         const notes = await response.json()
 
+        if(notes.length === 0){
+            cardContainer.innerHTML = '<p>No note to display</p>'
+        }
+
         notes.map(note =>{
             // Call the function to generate the card
             const date = new Date(note.createdAt)
@@ -191,6 +195,10 @@ const displayPersonalNotes = async() => {
         const notes = await response.json()
 
         const personalNotes = notes.filter(note => note.category === 'Personal')    
+
+        if(personalNotes.length === 0){
+            cardContainer.innerHTML = '<p class="no-notetext">No personal note to display</p>'
+        }
         
         personalNotes.map(personalNote => {
             const date = new Date(personalNote.createdAt)
@@ -255,6 +263,10 @@ const displayHomeNotes = async() => {
         const notes = await response.json()
 
         const homeNotes = notes.filter(note => note.category === 'Home')    
+
+        if(homeNotes.length === 0){
+            cardContainer.innerHTML = '<p class="no-notetext">No home note to display</p>'
+        }
         
         homeNotes.map(homeNote => {
             const date = new Date(homeNote.createdAt)
@@ -319,6 +331,10 @@ const displayBusinessNotes = async() => {
 
         const businessNotes = notes.filter(note => note.category === 'Business')    
         
+        if(businessNotes.length === 0){
+            cardContainer.innerHTML = '<p class="no-notetext">No business note to display</p>'
+        }
+
         businessNotes.map(businessNote => {
             const date = new Date(businessNote.createdAt)
             const creationDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
@@ -384,6 +400,10 @@ const showCompletedNotes = async () => {
         const notes = await response.json()
 
         const completedNotes = notes.filter(note => note.completed === true)    
+
+        if(completedNotes.length === 0){
+            cardContainer.innerHTML = '<p class="no-notetext">No completed note to display</p>'
+        }
         
         completedNotes.map(completedNote => {
             const date = new Date(completedNote.createdAt)

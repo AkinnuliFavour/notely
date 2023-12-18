@@ -197,6 +197,15 @@
   opacity: 36%;
 }
 
+.no-notetext{
+  position: absolute;
+  font-size: large;
+  font-weight: 500;
+  top: 50%;
+  left: 40%;
+  color: #212121;
+}
+
 @media (max-width: 500px) {
   .custom-card{
     width: 100%;

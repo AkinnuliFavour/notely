@@ -1,5 +1,4 @@
-// const apiUrl = 'https://notely-orcin.vercel.app/notes'
-const apiUrl = 'http://localhost:3500/notes'
+const apiUrl = 'https://notely-orcin.vercel.app/notes'
 
 const cardContainer = document.querySelector('.card-container')
 

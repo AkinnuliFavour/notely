@@ -216,5 +216,8 @@
   }
   .input-container{
       width: 100%;
-    }
+  }
+  .no-notetext{
+    position: relative;
+  }
 }

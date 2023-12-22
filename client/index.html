@@ -21,18 +21,17 @@
         <h1 class="text-gray-900 text-[24px] font-semibold">Your notes</h1>
         <button type="button" class="md:hidden w-[90px] h-[48px] bg-blue-400 hover:bg-blue-500 text-white text-[14px] rounded-3xl mini-button" id="button">+ Add</button>
     </div>
-    <div class="flex md:justify-between mt-8 w-full" data-aos="zoom-in">
-        <ul class="max-w-full md:w-2/4 flex text-center border-collapse">
-            <li><button class="p-2 border-b-2 border-black/[.12] md:w-[104px] text-gray-900 opacity-[60%] hover:opacity-[87%] focus:border-blue-400 focus:text-blue-400 focus:opacity-100 text-[16px] font-medium outline-none" autofocus>All</button></li>
-            <li><button class="p-2 border-b-2 border-black/[.12] md:w-[104px] text-gray-900 opacity-[60%] hover:opacity-[87%] focus:border-blue-400 focus:text-blue-400 focus:opacity-100 text-[16px] font-medium">PERSONAL</button></li>
-            <li><button class="p-2 border-b-2 border-black/[.12] md:w-[104px] text-gray-900 opacity-[60%] hover:opacity-[87%] focus:border-blue-400 focus:text-blue-400 focus:opacity-100 text-[16px] font-medium">HOME</button></li>
-            <li><button class="p-2 border-b-2 border-black/[.12] md:w-[104px] text-gray-900 opacity-[60%] hover:opacity-[87%] focus:border-blue-400 focus:text-blue-400 focus:opacity-100 text-[16px] font-medium">BUSINESS</button></li>
+    <div class="hidden md:flex items-center gap-1 mt-8">
+        <input type="checkbox" name="" id="display" class="accent-[#212121] opacity-[36%]">
+        <label for="display" class="text-[14px] text-gray-900 text-center font-normal opacity-[87%]">Show only completed notes</label>
+    </div>
+    <div class="mt-8 w-full" data-aos="zoom-in">
+        <ul class="w-full flex justify-between text-center border-collapse border-b-2 border-black/[.02]">
+            <li><button class="p-2 text-gray-900 opacity-[60%] hover:opacity-[87%] focus:border-b-2 focus:border-blue-400 focus:text-blue-400 focus:opacity-100 text-[16px] font-medium outline-none" autofocus>All</button></li>
+            <li><button class="p-2 text-gray-900 opacity-[60%] hover:opacity-[87%] focus:border-b-2 focus:border-blue-400 focus:text-blue-400 focus:opacity-100 text-[16px] font-medium outline-none">PERSONAL</button></li>
+            <li><button class="p-2 text-gray-900 opacity-[60%] hover:opacity-[87%] focus:border-b-2 focus:border-blue-400 focus:text-blue-400 focus:opacity-100 text-[16px] font-medium outline-none">HOME</button></li>
+            <li><button class="p-2 text-gray-900 opacity-[60%] hover:opacity-[87%] focus:border-b-2 focus:border-blue-400 focus:text-blue-400 focus:opacity-100 text-[16px] font-medium outline-none">BUSINESS</button></li>
         </ul>
-
-        <div class="hidden md:flex items-center gap-1">
-            <input type="checkbox" name="" id="display" class="accent-[#212121] opacity-[36%]">
-            <label for="display" class="text-[14px] text-gray-900 text-center font-normal opacity-[87%]">Show only completed notes</label>
-        </div>
     </div>
 
     <section class="card-container grid justify-center xl:grid-cols-2">

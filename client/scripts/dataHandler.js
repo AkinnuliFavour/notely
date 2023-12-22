@@ -23,6 +23,7 @@ function generateCard(id, title, category, description, completed, date) {
 const cardDiv = document.createElement('div');
 cardDiv.classList.add('custom-card');
 cardDiv.setAttribute("data-aos", "fade-up")
+cardDiv.setAttribute("data-aos-once", "false")
 cardDiv.id = id
 
 // Create the inner structure of the card using template literals

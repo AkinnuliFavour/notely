@@ -64,6 +64,7 @@
   padding: 12px;
   background-color: #EEEEEE;
   border-radius: 8px;
+  resize: none;
 }
 
 .title-input:focus, .description-input:focus{

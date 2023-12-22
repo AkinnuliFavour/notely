@@ -88,6 +88,7 @@ const createEditModal = (id) => {
     const descriptionLabel = document.createElement('label');
     descriptionLabel.textContent = 'Description(optional)';
     editDescriptionInput.classList.add('description-input')
+    editDescriptionInput.maxLength = 200
     editDescriptionInput.placeholder = 'Add description'
     
     descriptionContainer.append(descriptionLabel, editDescriptionInput)

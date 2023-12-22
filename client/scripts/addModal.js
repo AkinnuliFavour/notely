@@ -69,8 +69,9 @@ descriptionContainer.classList.add('input-container', 'description-container')
 const descriptionLabel = document.createElement('label');
 descriptionLabel.textContent = 'Description(optional)';
 const descriptionInput = document.createElement('textarea');
+descriptionInput.maxLength = 200
 descriptionInput.classList.add('description-input')
-descriptionInput.placeholder = 'Add description'
+descriptionInput.placeholder = 'Add description (Max words: 200)'
 descriptionContainer.append(descriptionLabel, descriptionInput)
 
 // creates the modal to fill the form for a new note

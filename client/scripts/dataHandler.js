@@ -383,10 +383,13 @@ const displayBusinessNotes = async() => {
     }
 }
 
-const showCompletedNotes = async () => {
+const showCompletedNotes = async (e) => {
     console.log('clicked')
     let noteCard = []
     cardContainer.innerHTML = ''
+    if(e.target.checked === false){
+        await location.reload()
+    }
     try {
         const response = await fetch(apiUrl)
 

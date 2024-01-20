@@ -9,12 +9,6 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script defer>
-        AOS.init({
-          duration: 1000,
-          once: true,
-        });
-    </script>
     <title>Notely</title>
 </head>
 <body class="min-w-screen max-w-screen bg-gray-200 font-roboto font-normal">
@@ -50,5 +44,10 @@
    <script src="./scripts/dataHandler.js" defer></script>
    <script src="./scripts/editModal.js" defer></script>
    <script src="./scripts/deleteModal.js" defer></script>
+       <script defer>
+        AOS.init({
+          once: true,
+        });
+    </script>
 </body>
 </html>

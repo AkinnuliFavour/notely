@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom"
 
 const SharedLayout = () => {
   return (
-    <main className="min-w-screen max-w-screen bg-gray-200 font-roboto font-normal">
+    <main className="min-w-screen max-w-screen min-h-screen bg-gray-200 font-roboto font-normal">
       <nav className="bg-white flex justify-between md:justify-around items-center h-[82px] shadow-sm px-2 w-full" data-aos="fade-down">
         <input type="search" name="" id="" className="bg-gray-200 w-full md:w-[70%] lg:w-3/4 h-[48px] px-4 rounded-lg outline-none focus:border focus:border-blue-500" />
         <button type="button" className="hidden md:block w-[90px] h-[48px] bg-blue-500 hover:bg-blue-400 text-white text-[14px] font-medium rounded-3xl" id="button">+ Add</button>
@@ -25,7 +25,7 @@ const SharedLayout = () => {
           </ul>
         </div>
 
-        <section className="card-container grid justify-center xl:grid-cols-2">
+        <section className="card-container grid justify-center grid-cols-2">
           <Outlet />
         </section>
       </section>

@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const SharedLayout = () => {
   return (
@@ -57,27 +58,37 @@ const SharedLayout = () => {
         <div className="mt-8 w-full" data-aos="fade-down">
           <ul className="w-full flex justify-between text-center border-collapse border-b-2 border-black/[.02]">
             <li>
-              <button
+              <Link
+                to="/"
                 className="p-2 text-gray-900 opacity-[60%] hover:opacity-[87%] focus:border-b-2 focus:border-blue-400 focus:text-blue-400 focus:opacity-100 text-[16px] font-medium outline-none"
                 autoFocus={true}
               >
                 All
-              </button>
+              </Link>
             </li>
             <li>
-              <button className="p-2 text-gray-900 opacity-[60%] hover:opacity-[87%] focus:border-b-2 focus:border-blue-400 focus:text-blue-400 focus:opacity-100 text-[16px] font-medium outline-none">
+              <Link
+                to="/personal"
+                className="p-2 text-gray-900 opacity-[60%] hover:opacity-[87%] focus:border-b-2 focus:border-blue-400 focus:text-blue-400 focus:opacity-100 text-[16px] font-medium outline-none"
+              >
                 PERSONAL
-              </button>
+              </Link>
             </li>
             <li>
-              <button className="p-2 text-gray-900 opacity-[60%] hover:opacity-[87%] focus:border-b-2 focus:border-blue-400 focus:text-blue-400 focus:opacity-100 text-[16px] font-medium outline-none">
+              <Link
+                to="/home"
+                className="p-2 text-gray-900 opacity-[60%] hover:opacity-[87%] focus:border-b-2 focus:border-blue-400 focus:text-blue-400 focus:opacity-100 text-[16px] font-medium outline-none"
+              >
                 HOME
-              </button>
+              </Link>
             </li>
             <li>
-              <button className="p-2 text-gray-900 opacity-[60%] hover:opacity-[87%] focus:border-b-2 focus:border-blue-400 focus:text-blue-400 focus:opacity-100 text-[16px] font-medium outline-none">
+              <Link
+                to="/business"
+                className="p-2 text-gray-900 opacity-[60%] hover:opacity-[87%] focus:border-b-2 focus:border-blue-400 focus:text-blue-400 focus:opacity-100 text-[16px] font-medium outline-none"
+              >
                 BUSINESS
-              </button>
+              </Link>
             </li>
           </ul>
         </div>

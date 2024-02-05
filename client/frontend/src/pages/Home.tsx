@@ -1,35 +1,8 @@
-import { useEffect, useState } from "react";
 import Note from "../components/Note";
-
-type Notes = {
-  id: number;
-  category: string;
-  title: string;
-  description: string;
-  date: string;
-  completed: boolean;
-}[];
+import { useFetch } from "../hooks/useFetch";
 
 const Home = () => {
-  // const apiUrl = 'https://notely-orcin.vercel.app/notes'
-  const [notes, setNotes] = useState<Notes>([]);
-  //   const [isLoading, setIsLoading] = useState(true);
-  //   // const [error, setError] = useState(null)
-
-  useEffect(() => {
-    const fetchNotes = async () => {
-      try {
-        const res = await fetch("https://notely-orcin.vercel.app/notes");
-        const data = await res.json();
-        console.log(data);
-        setNotes(data);
-        // setIsLoading(false);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchNotes();
-  }, []);
+  const { notes } = useFetch();
 
   return (
     <>

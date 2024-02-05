@@ -1,5 +1,5 @@
-import Note from "../components/Note";
-import { useFetch } from "../hooks/useFetch";
+import Note from "../../components/Note";
+import { useFetch } from "../../hooks/useFetch";
 
 const Home = () => {
   const { notes } = useFetch();

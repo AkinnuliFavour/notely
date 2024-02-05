@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SharedLayout from "./Layouts/SharedLayout";
-import Home from "./pages/Home";
+import Home from "./pages/home/Home";
 import Business from "./pages/business/Business";
 
 function App() {

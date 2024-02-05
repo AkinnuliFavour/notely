@@ -56,7 +56,7 @@ const SharedLayout = () => {
           </label>
         </div>
         <div className="mt-8 w-full" data-aos="fade-down">
-          <ul className="w-full flex justify-between text-center border-collapse border-b-2 border-black/[.02]">
+          <ul className="w-full py-[5px] flex justify-between text-center border-collapse border-b-2 border-black/[.02]">
             <li>
               <Link
                 to="/"

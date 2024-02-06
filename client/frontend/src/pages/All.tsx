@@ -1,17 +1,14 @@
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Note from "../components/Note";
+import DeleteNote from "../components/DeleteNote";
 import { fetchNotes } from "../utils/fetchNotes";
-
-type Notes = {
-  id: number;
-  category: string;
-  title: string;
-  description: string;
-  date: string;
-  completed: boolean;
-}[];
+import { Notes } from "../types";
 
 const All = () => {
+
+  const [isOpened, setIsOpened] = useState(false);
+
   const {
     data: notes,
     error,
@@ -32,8 +29,10 @@ const All = () => {
           description={note.description}
           date={note.date}
           completed={note.completed}
+          setIsOpened={setIsOpened}
         />
       ))}
+      {isOpened && <DeleteNote setIsOpened={setIsOpened}/>}
     </>
   );
 };

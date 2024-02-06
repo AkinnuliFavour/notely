@@ -4,9 +4,13 @@ import { Notes } from "../../types";
 import { fetchNotes } from "../../utils/fetchNotes";
 import { useState } from "react";
 import DeleteModal from "../../components/DeleteModal";
+import EditModal from "../../components/EditModal";
 
 const Business = () => {
+
   const [isOpened, setIsOpened] = useState(false);
+  const [editOpened, setEditOpened] = useState(false);
+
   const {
     data: notes,
     error,
@@ -29,9 +33,11 @@ const Business = () => {
           date={note.date}
           completed={note.completed}
           setIsOpened={setIsOpened}
+          setEditOpened={setEditOpened}
         />
       ))}
       {isOpened && <DeleteModal setIsOpened={setIsOpened}/>}
+      {editOpened && <EditModal setEditOpened={setEditOpened}/>}
     </>
   );
 };

@@ -14,4 +14,5 @@ export type NoteProps = {
   date: string;
   completed: boolean;
   setIsOpened: React.Dispatch<React.SetStateAction<boolean>>;
+  setEditOpened: React.Dispatch<React.SetStateAction<boolean>>;
 };

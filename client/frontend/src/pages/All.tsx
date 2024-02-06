@@ -4,10 +4,12 @@ import Note from "../components/Note";
 import DeleteModal from "../components/DeleteModal";
 import { fetchNotes } from "../utils/fetchNotes";
 import { Notes } from "../types";
+import EditModal from "../components/EditModal";
 
 const All = () => {
 
   const [isOpened, setIsOpened] = useState(false);
+  const [editOpened, setEditOpened] = useState(false);
 
   const {
     data: notes,
@@ -30,9 +32,11 @@ const All = () => {
           date={note.date}
           completed={note.completed}
           setIsOpened={setIsOpened}
+          setEditOpened={setEditOpened}
         />
       ))}
       {isOpened && <DeleteModal setIsOpened={setIsOpened}/>}
+      {editOpened && <EditModal setEditOpened={setEditOpened}/>}
     </>
   );
 };

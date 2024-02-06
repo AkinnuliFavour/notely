@@ -1,5 +1,5 @@
 // import React from "react"
-const EditModal = ({setIsOpened}:  {setIsOpened: React.Dispatch<React.SetStateAction<boolean>>}) => {
+const EditModal = ({setEditOpened}:  {setEditOpened: React.Dispatch<React.SetStateAction<boolean>>}) => {
     return (
       <main className="w-full h-full backdrop top-0 left-0">
         <section className="modal">
@@ -37,7 +37,7 @@ const EditModal = ({setIsOpened}:  {setIsOpened: React.Dispatch<React.SetStateAc
               </textarea>
             </div>
             <div className="button-container">
-              <button type="submit" className="cancel-button" onClick={() => setIsOpened(false)}>Cancel</button>
+              <button type="submit" className="cancel-button" onClick={() => setEditOpened(false)}>Cancel</button>
               <button type="button" className="add-button px-6">Edit</button>
             </div>
           </form>

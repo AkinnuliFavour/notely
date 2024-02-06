@@ -1,5 +1,5 @@
 // import React from "react"
-const DeleteNote = ({setIsOpened}:  {setIsOpened: React.Dispatch<React.SetStateAction<boolean>>}) => {
+const DeleteModal = ({setIsOpened}:  {setIsOpened: React.Dispatch<React.SetStateAction<boolean>>}) => {
   return (
     <main className="w-full h-full backdrop top-0 left-0">
       <section className="delete-modal">
@@ -14,4 +14,4 @@ const DeleteNote = ({setIsOpened}:  {setIsOpened: React.Dispatch<React.SetStateA
   )
 }
 
-export default DeleteNote
+export default DeleteModal

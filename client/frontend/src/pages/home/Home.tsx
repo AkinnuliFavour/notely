@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import Note from "../../components/Note";
 import { Notes } from "../../types";
 import { fetchNotes } from "../../utils/fetchNotes";
-import DeleteNote from "../../components/DeleteNote";
+import DeleteModal from "../../components/DeleteModal";
 import { useState } from "react";
 
 const Home = () => {
@@ -31,7 +31,7 @@ const Home = () => {
           setIsOpened={setIsOpened}
         />
       ))}
-      {isOpened && <DeleteNote setIsOpened={setIsOpened}/>}
+      {isOpened && <DeleteModal setIsOpened={setIsOpened}/>}
     </>
   );
 };

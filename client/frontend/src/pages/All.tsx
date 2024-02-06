@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Note from "../components/Note";
-import DeleteNote from "../components/DeleteNote";
+import DeleteModal from "../components/DeleteModal";
 import { fetchNotes } from "../utils/fetchNotes";
 import { Notes } from "../types";
 
@@ -32,7 +32,7 @@ const All = () => {
           setIsOpened={setIsOpened}
         />
       ))}
-      {isOpened && <DeleteNote setIsOpened={setIsOpened}/>}
+      {isOpened && <DeleteModal setIsOpened={setIsOpened}/>}
     </>
   );
 };

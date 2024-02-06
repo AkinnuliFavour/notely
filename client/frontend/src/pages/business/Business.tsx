@@ -3,7 +3,7 @@ import Note from "../../components/Note";
 import { Notes } from "../../types";
 import { fetchNotes } from "../../utils/fetchNotes";
 import { useState } from "react";
-import DeleteNote from "../../components/DeleteNote";
+import DeleteModal from "../../components/DeleteModal";
 
 const Business = () => {
   const [isOpened, setIsOpened] = useState(false);
@@ -31,7 +31,7 @@ const Business = () => {
           setIsOpened={setIsOpened}
         />
       ))}
-      {isOpened && <DeleteNote setIsOpened={setIsOpened}/>}
+      {isOpened && <DeleteModal setIsOpened={setIsOpened}/>}
     </>
   );
 };

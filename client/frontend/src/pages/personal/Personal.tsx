@@ -3,7 +3,7 @@ import Note from "../../components/Note";
 import { fetchNotes } from "../../utils/fetchNotes";
 import { Notes } from "../../types";
 import { useState } from "react";
-import DeleteNote from "../../components/DeleteNote";
+import DeleteModal from "../../components/DeleteModal";
 
 const Personal = () => {
   const [isOpened, setIsOpened] = useState(false);
@@ -33,7 +33,7 @@ const Personal = () => {
           setIsOpened={setIsOpened}
         />
       ))}
-      {isOpened && <DeleteNote setIsOpened={setIsOpened}/>}
+      {isOpened && <DeleteModal setIsOpened={setIsOpened}/>}
     </>
   );
 };

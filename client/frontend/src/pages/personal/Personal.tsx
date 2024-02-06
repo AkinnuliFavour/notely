@@ -2,8 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import Note from "../../components/Note";
 import { fetchNotes } from "../../utils/fetchNotes";
 import { Notes } from "../../types";
+import { useState } from "react";
+import DeleteNote from "../../components/DeleteNote";
 
 const Personal = () => {
+  const [isOpened, setIsOpened] = useState(false);
   const {
     data: notes,
     error,
@@ -27,8 +30,10 @@ const Personal = () => {
           description={note.description}
           date={note.date}
           completed={note.completed}
+          setIsOpened={setIsOpened}
         />
       ))}
+      {isOpened && <DeleteNote setIsOpened={setIsOpened}/>}
     </>
   );
 };

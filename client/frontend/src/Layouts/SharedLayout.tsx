@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { Link } from "react-router-dom";
+import AddModal from "../components/AddModal";
 
 const SharedLayout = () => {
+  const [isOpened, setIsOpened] = useState(false);
   return (
     <main className="min-w-screen max-w-screen min-h-screen bg-gray-200 font-roboto font-normal">
       <nav
@@ -18,6 +21,7 @@ const SharedLayout = () => {
           type="button"
           className="hidden md:block w-[90px] h-[48px] bg-blue-500 hover:bg-blue-400 text-white text-[14px] font-medium rounded-3xl"
           id="button"
+          onClick={() => setIsOpened(true)}
         >
           + Add
         </button>
@@ -34,6 +38,7 @@ const SharedLayout = () => {
             type="button"
             className="md:hidden w-[90px] h-[48px] bg-blue-400 hover:bg-blue-500 text-white text-[14px] rounded-3xl mini-button"
             id="button"
+            onClick={() => setIsOpened(true)}
           >
             + Add
           </button>
@@ -97,6 +102,7 @@ const SharedLayout = () => {
           <Outlet />
         </section>
       </section>
+      {isOpened && <AddModal setIsOpened={setIsOpened} />}
     </main>
   );
 };

@@ -17,12 +17,12 @@ const AddModal = ({setIsOpened}:  {setIsOpened: React.Dispatch<React.SetStateAct
             <div className="input-container">
               <label htmlFor="category">Category</label>
               <select name="category" id="category" className="category-input">
-                <option value="work">Work</option>
                 <option value="personal">Personal</option>
-                <option value="others">Others</option>
+                <option value="home">Home</option>
+                <option value="business">Business</option>
               </select>
             </div>
-            <div className="input-cotainer description-container">
+            <div className="input-cotainer description-container flex flex-col">
               <label htmlFor="content">Description(optional)</label>
               <textarea 
                 name="content" 
@@ -38,7 +38,7 @@ const AddModal = ({setIsOpened}:  {setIsOpened: React.Dispatch<React.SetStateAct
             </div>
             <div className="button-container">
               <button type="submit" className="cancel-button" onClick={() => setIsOpened(false)}>Cancel</button>
-              <button type="button" className="add-button">Cancel</button>
+              <button type="button" className="add-button px-6">Add</button>
             </div>
           </form>
         </section>

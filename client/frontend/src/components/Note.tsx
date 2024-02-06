@@ -1,6 +1,6 @@
 import { NoteProps } from "../types";
 
-const Note = ({ category, title, description, date, completed, setIsOpened }: NoteProps) => {
+const Note = ({ category, title, description, date, completed, setIsOpened, setEditOpened }: NoteProps) => {
   return (
     <section className="custom-card">
       <div className="flex justify-between">
@@ -15,7 +15,10 @@ const Note = ({ category, title, description, date, completed, setIsOpened }: No
             id=""
             className="checkbox-input"
           />
-          <button className="edit-button ${completed ? 'color' : null}">
+          <button 
+            className="edit-button ${completed ? 'color' : null}"
+            onClick={() => setEditOpened(true)}
+          >
             <img src="/pencil.svg" alt="" />
           </button>
           <button

@@ -3,7 +3,7 @@ const EditModal = ({setEditOpened}:  {setEditOpened: React.Dispatch<React.SetSta
     return (
       <main className="w-full h-full backdrop top-0 left-0">
         <section className="modal">
-          <p className="heading">Add Note</p>
+          <p className="heading">Edit Note</p>
           <form action="" className="modal-form">
             <div className="input-container">
               <label htmlFor="title">Title</label>

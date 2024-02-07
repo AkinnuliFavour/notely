@@ -2,14 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import Note from "../../components/Note";
 import { fetchNotes } from "../../utils/fetchNotes";
 import { Notes } from "../../types";
-import { useState } from "react";
-import DeleteModal from "../../components/DeleteModal";
-import EditModal from "../../components/EditModal";
 
 const Personal = () => {
-
-  const [isOpened, setIsOpened] = useState(false);
-  const [editOpened, setEditOpened] = useState(false);
 
   const {
     data: notes,
@@ -34,12 +28,8 @@ const Personal = () => {
           description={note.description}
           date={note.date}
           completed={note.completed}
-          setIsOpened={setIsOpened}
-          setEditOpened={setEditOpened}
         />
       ))}
-      {isOpened && <DeleteModal setIsOpened={setIsOpened}/>}
-      {editOpened && <EditModal setEditOpened={setEditOpened}/>}
     </>
   );
 };

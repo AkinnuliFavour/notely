@@ -1,6 +1,14 @@
+import { useState } from "react";
+import DeleteModal from "./DeleteModal";
+import EditModal from "./EditModal";
 import { NoteProps } from "../types";
 
-const Note = ({ category, title, description, date, completed, setIsOpened, setEditOpened }: NoteProps) => {
+
+const Note = ({ category, title, description, date, completed }: NoteProps) => {
+
+  const [isOpened, setIsOpened] = useState(false);
+  const [editOpened, setEditOpened] = useState(false);
+
   return (
     <section className="custom-card">
       <div className="flex justify-between">
@@ -36,6 +44,8 @@ const Note = ({ category, title, description, date, completed, setIsOpened, setE
         {description}
       </p>
       <p className={`task-date ${completed ? "line-through" : null}`}>{date}</p>
+      {isOpened && <DeleteModal setIsOpened={setIsOpened}/>}
+      {editOpened && <EditModal setEditOpened={setEditOpened}/>}
     </section>
   );
 };

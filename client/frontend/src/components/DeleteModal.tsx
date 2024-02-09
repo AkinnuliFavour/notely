@@ -1,5 +1,5 @@
 // import React from "react"
-const DeleteModal = ({setIsOpened}:  {setIsOpened: React.Dispatch<React.SetStateAction<boolean>>}) => {
+const DeleteModal = ({setIsOpened, id}:  {setIsOpened: React.Dispatch<React.SetStateAction<boolean>>, id: number}) => {
   return (
     <main className="w-full h-full backdrop top-0 left-0">
       <section className="delete-modal">

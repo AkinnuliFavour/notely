@@ -4,10 +4,12 @@ import EditModal from "./EditModal";
 import { NoteProps } from "../types";
 
 
-const Note = ({ category, title, description, date, completed }: NoteProps) => {
+const Note = ({ id, category, title, description, date, completed }: NoteProps) => {
 
   const [isOpened, setIsOpened] = useState(false);
   const [editOpened, setEditOpened] = useState(false);
+
+  console.log(id)
 
   return (
     <section className="custom-card">
@@ -44,8 +46,8 @@ const Note = ({ category, title, description, date, completed }: NoteProps) => {
         {description}
       </p>
       <p className={`task-date ${completed ? "line-through" : null}`}>{date}</p>
-      {isOpened && <DeleteModal setIsOpened={setIsOpened}/>}
-      {editOpened && <EditModal setEditOpened={setEditOpened}/>}
+      {isOpened && <DeleteModal setIsOpened={setIsOpened} id={id}/>}
+      {editOpened && <EditModal setEditOpened={setEditOpened} id={id} />}
     </section>
   );
 };

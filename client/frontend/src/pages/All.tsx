@@ -15,11 +15,14 @@ const All = () => {
 
   if (error) return <h1>Error: {error.message}</h1>;
 
+  console.log(notes);
+
   return (
     <>
       {notes?.map((note) => (
         <Note
-          key={note.id}
+          key={note._id}
+          id={note._id}
           category={note.category}
           title={note.title}
           description={note.description}

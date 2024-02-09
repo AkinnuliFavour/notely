@@ -1,5 +1,5 @@
 export type Notes = {
-  id: number;
+  _id: number;
   category: string;
   title: string;
   description: string;
@@ -8,6 +8,7 @@ export type Notes = {
 }[];
 
 export type NoteProps = {
+  id: number;
   category: string;
   title: string;
   description: string;

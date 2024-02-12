@@ -14,7 +14,7 @@ const DeleteModal = ({setIsOpened, id}:  {setIsOpened: React.Dispatch<React.SetS
 
   const note = notes?.find(note => note._id === id)
 
-  const deleteData = async (noteId: number) => {
+  const deleteData = async (noteId: string) => {
     const response = await axios.delete(`https://notely-orcin.vercel.app/notes/`, { data: noteId });
     return response.data; // Assuming your API returns updated data
   };
@@ -24,7 +24,7 @@ const DeleteModal = ({setIsOpened, id}:  {setIsOpened: React.Dispatch<React.SetS
   const handleDelete = (e: React.FormEvent) => {
     e.preventDefault()
     // Assuming newData is the data you want to update
-    mutation.mutate(Number(note?._id));
+    mutation.mutate(note?._id?.toString() ?? '');
   };
 
 

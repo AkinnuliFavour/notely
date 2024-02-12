@@ -4,14 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import axios from "axios";
 import { fetchNotes } from "../utils/fetchNotes";
 import { Notes } from "../types";
-
-type FormData = {
-  id: number;
-  title: string;
-  category: string;
-  description: string;
-  completed: boolean;
-}
+import { FormData } from "../types";
 
 const EditModal = ({setEditOpened, id}:  {setEditOpened: React.Dispatch<React.SetStateAction<boolean>>, id: number}) => {
 

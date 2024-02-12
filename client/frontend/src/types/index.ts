@@ -15,3 +15,11 @@ export type NoteProps = {
   date: string;
   completed: boolean;
 };
+
+export type FormData = {
+  id: number;
+  title: string;
+  category: string;
+  description: string;
+  completed: boolean;
+}

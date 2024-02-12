@@ -109,7 +109,7 @@ const mutation = useMutation({mutationFn: createData});
             </div>
             <div className="button-container">
               <button type="submit" className="cancel-button" onClick={() => setIsOpened(false)}>Cancel</button>
-              <button type="button" className="add-button px-6">Add</button>
+              <button type="button" className="add-button px-6" onClick={handlePost}>Add</button>
             </div>
           </form>
         </section>

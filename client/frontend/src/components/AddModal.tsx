@@ -73,12 +73,19 @@ const mutation = useMutation({mutationFn: createData});
                id="title" 
                name="title" 
                value={title}
+               onChange={(e) => setTitle(e.target.value)}
                className="title-input"
               />
             </div>
             <div className="input-container">
               <label htmlFor="category">Category</label>
-              <select name="category" id="category" className="category-input" value={category}>
+              <select
+                name="category"
+                id="category" 
+                className="category-input"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)} 
+              >
                 <option value="personal">Personal</option>
                 <option value="home">Home</option>
                 <option value="business">Business</option>
@@ -94,6 +101,7 @@ const mutation = useMutation({mutationFn: createData});
                 rows={10}
                 placeholder="Add a description... (Max 180 characters)"
                 value={description}
+                onChange={(e) => setDescription(e.target.value)}
                 className="description-input" 
               >
 

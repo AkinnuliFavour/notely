@@ -1,20 +1,17 @@
 // import React from "react"
-import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query";
-import { Notes } from "../types";
-import { fetchNotes } from "../utils/fetchNotes";
-import { useEffect, useState } from "react";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
+import { useState } from "react";
 import axios from "axios";
-import { FormData } from "../types";
 
-const AddModal = ({ setIsOpened, id }:  { setIsOpened: React.Dispatch<React.SetStateAction<boolean>>, id: number }) => {
+type FormType = {
+  title: string;
+  category: string;
+  description: string;
+  completed: boolean;
+};
+
+const AddModal = ({ setIsOpened }:  { setIsOpened: React.Dispatch<React.SetStateAction<boolean>> }) => {
   const queryClient = useQueryClient()
-
-  const {
-    data: notes,
-  } = useQuery<Notes>({ queryKey: ["notes"], queryFn: fetchNotes
- });
-
-  const note = notes?.find(note => note._id === id)
 
   // const [formData, setFormData] = useState({
   //   id,
@@ -27,16 +24,7 @@ const AddModal = ({ setIsOpened, id }:  { setIsOpened: React.Dispatch<React.SetS
   const [category, setCategory] = useState("Personal")
   const [description, setDescription] = useState("")
 
-useEffect(() => {
-  if(note) {
-    setTitle(note.title)
-    setCategory(note.category)
-    setDescription(note.description)
-  }
-}
-, [note])
-
-const createData = async (data: FormData) => {
+const createData = async (data: FormType) => {
   const response = await axios.post("https://notely-orcin.vercel.app/notes/", data);
   return response.data; // Assuming your API returns updated data
 };
@@ -47,11 +35,10 @@ const mutation = useMutation({mutationFn: createData});
     e.preventDefault()
     // Assuming newData is the data you want to update
     mutation.mutate({
-      id,
       title,
       category,
       description,
-      completed: note ? note.completed : false
+      completed: false
     });
   };
 
@@ -86,9 +73,9 @@ const mutation = useMutation({mutationFn: createData});
                 value={category}
                 onChange={(e) => setCategory(e.target.value)} 
               >
-                <option value="personal">Personal</option>
-                <option value="home">Home</option>
-                <option value="business">Business</option>
+                <option value="Personal">Personal</option>
+                <option value="Home">Home</option>
+                <option value="Business">Business</option>
               </select>
             </div>
             <div className="input-cotainer description-container flex flex-col">

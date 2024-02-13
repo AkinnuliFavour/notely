@@ -1,37 +1,49 @@
+/**
+ * This file contains the DeleteModal component.
+ * 
+ * @module DeleteModal
+ * @filepath /workspaces/notely/client/frontend/src/components/DeleteModal.tsx
+ * @description This component provides a modal for deleting items.
+ */
+
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Notes } from "../types";
 import { fetchNotes } from "../utils/fetchNotes";
 import axios from "axios";
 
-// import React from "react"
 const DeleteModal = ({setIsOpened, id}:  {setIsOpened: React.Dispatch<React.SetStateAction<boolean>>, id: number}) => {
 
   console.log(id)
 
   const queryClient = useQueryClient()
 
+  //fetch the notes
   const {
     data: notes,
   } = useQuery<Notes>({ queryKey: ["notes"], queryFn: fetchNotes
  });
 
+  //find the note with the id
   const note = notes?.find(note => note._id === id)
   console.log(note)
 
+  // function to delete a note
   const deleteNote = async () => {
     const response = await axios.delete(`https://notely-orcin.vercel.app/notes`, {data: {id}});
     return response.data;
   };
 
+  //useMutation hook
   const mutation = useMutation({mutationFn: deleteNote});
 
   const handleDelete = (e: React.FormEvent) => {
+    //prevent the default form submission
     e.preventDefault()
-    // Assuming newData is the data you want to update
+    // call the mutation function
     mutation.mutate();
   };
 
-
+  //if the mutation is successful, close the modal and invalidate the notes query
   if (mutation.isSuccess) {
     setIsOpened(false);
     queryClient.invalidateQueries({ queryKey: ["notes"] });

@@ -16,19 +16,19 @@ const DeleteModal = ({setIsOpened, id}:  {setIsOpened: React.Dispatch<React.SetS
  });
 
   const note = notes?.find(note => note._id === id)
+  console.log(note)
 
-  const deleteData = async (noteId: string) => {
-    const response = await axios.delete(`https://notely-orcin.vercel.app/notes/`, { data: noteId });
-    return response.data; // Assuming your API returns updated data
+  const deleteNote = async () => {
+    const response = await axios.delete(`https://notely-orcin.vercel.app/notes`, {data: {id}});
+    return response.data;
   };
 
-  const mutation = useMutation({mutationFn: deleteData});
+  const mutation = useMutation({mutationFn: deleteNote});
 
   const handleDelete = (e: React.FormEvent) => {
     e.preventDefault()
     // Assuming newData is the data you want to update
-    console.log(note?._id?.toString() ?? '');
-    mutation.mutate(note?._id?.toString() ?? '');
+    mutation.mutate();
   };
 
 
@@ -40,14 +40,14 @@ const DeleteModal = ({setIsOpened, id}:  {setIsOpened: React.Dispatch<React.SetS
 
   return (
     <main className="w-full h-full backdrop top-0 left-0">
-      <section className="delete-modal">
+      <form action="" className="delete-modal" onSubmit={handleDelete}>
         <p className="heading">Delete Note</p>
         <p className="">Are you sure you want to delete this note?</p>
         <div className="button-container">
           <button className="cancel-button" onClick={()=> setIsOpened(false)}>Cancel</button>
-          <button className="delete-button" onClick={handleDelete}>Delete</button>
+          <button className="delete-button">Delete</button>
         </div>
-      </section>
+      </form>
     </main>
   )
 }

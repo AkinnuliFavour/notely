@@ -9,7 +9,6 @@ const Note = ({ id, category, title, description, date, completed }: NoteProps) 
 
   const [isOpened, setIsOpened] = useState(false);
   const [editOpened, setEditOpened] = useState(false);
-  const [completedState, setCompletedState] = useState(completed);
 
   const queryClient = useQueryClient();
 
@@ -20,26 +19,21 @@ const Note = ({ id, category, title, description, date, completed }: NoteProps) 
 
   const mutation = useMutation({mutationFn: updateData});
 
-  const handleUpdate = (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleUpdate = () => {
     // Assuming newData is the data you want to update
     mutation.mutate({
       id, 
       title, 
       category, 
       description,  
-      completed: completedState
+      completed: !completed
     });
   };
 
 
   if (mutation.isSuccess) {
-    setEditOpened(false);
     queryClient.invalidateQueries({ queryKey: ["notes"] });
-    console.log("Success");
   }
-
-  console.log(id)
 
   return (
     <section className="custom-card">
@@ -50,11 +44,8 @@ const Note = ({ id, category, title, description, date, completed }: NoteProps) 
         <div className="flex items-center">
           <input
             type="checkbox"
-            checked={completed}
-            onChange={(e) => {
-              setCompletedState(e.target.checked)
-              handleUpdate(e)
-            }}
+            checked={completed ? true : false}
+            onClick={handleUpdate}
             name=""
             id=""
             className="checkbox-input"

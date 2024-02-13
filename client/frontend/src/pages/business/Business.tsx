@@ -10,6 +10,7 @@ const Business = () => {
     error,
     isLoading,
   } = useQuery<Notes>({ queryKey: ["notes"], queryFn: fetchNotes });
+  
   const businessNotes = notes?.filter((note) => note.category === "Business");
 
   if (isLoading) return <h1>Loading...</h1>;

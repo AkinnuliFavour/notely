@@ -41,12 +41,6 @@ const updateData = async (data: FormData) => {
   return response.data; // Assuming your API returns updated data
 };
 
-  // const apiUrl = `https://notely-orcin.vercel.app/notes`
-
-  // const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-  //   setFormData({...formData, category: e.target.value})
-  // }
-
 const mutation = useMutation({mutationFn: updateData});
 
   const handleUpdate = (e: React.FormEvent) => {

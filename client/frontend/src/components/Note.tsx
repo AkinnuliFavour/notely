@@ -1,13 +1,43 @@
 import { useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import DeleteModal from "./DeleteModal";
 import EditModal from "./EditModal";
-import { NoteProps } from "../types";
-
+import { FormData, NoteProps } from "../types";
+import axios from "axios";
 
 const Note = ({ id, category, title, description, date, completed }: NoteProps) => {
 
   const [isOpened, setIsOpened] = useState(false);
   const [editOpened, setEditOpened] = useState(false);
+  const [completedState, setCompletedState] = useState(completed);
+
+  const queryClient = useQueryClient();
+
+  const updateData = async (data: FormData) => {
+    const response = await axios.put(`https://notely-orcin.vercel.app/notes/`, data);
+    return response.data; // Assuming your API returns updated data
+  };
+
+  const mutation = useMutation({mutationFn: updateData});
+
+  const handleUpdate = (e: React.FormEvent) => {
+    e.preventDefault()
+    // Assuming newData is the data you want to update
+    mutation.mutate({
+      id, 
+      title, 
+      category, 
+      description,  
+      completed: completedState
+    });
+  };
+
+
+  if (mutation.isSuccess) {
+    setEditOpened(false);
+    queryClient.invalidateQueries({ queryKey: ["notes"] });
+    console.log("Success");
+  }
 
   console.log(id)
 
@@ -21,6 +51,10 @@ const Note = ({ id, category, title, description, date, completed }: NoteProps) 
           <input
             type="checkbox"
             checked={completed}
+            onChange={(e) => {
+              setCompletedState(e.target.checked)
+              handleUpdate(e)
+            }}
             name=""
             id=""
             className="checkbox-input"

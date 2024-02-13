@@ -20,7 +20,8 @@ const Home = () => {
     <>
       {homeNotes?.map((note) => (
         <Note
-          key={note.id}
+          key={note._id}
+          id={note._id}
           category={note.category}
           title={note.title}
           description={note.description}

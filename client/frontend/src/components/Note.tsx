@@ -9,6 +9,7 @@ const Note = ({ id, category, title, description, date, completed }: NoteProps) 
 
   const [isOpened, setIsOpened] = useState(false);
   const [editOpened, setEditOpened] = useState(false);
+  const [completedStatus, setCompletedStatus] = useState(completed);
 
   const queryClient = useQueryClient();
 
@@ -20,6 +21,7 @@ const Note = ({ id, category, title, description, date, completed }: NoteProps) 
   const mutation = useMutation({mutationFn: updateData});
 
   const handleUpdate = () => {
+    setCompletedStatus(prev => !prev);
     // Assuming newData is the data you want to update
     mutation.mutate({
       id, 
@@ -44,33 +46,33 @@ const Note = ({ id, category, title, description, date, completed }: NoteProps) 
         <div className="flex items-center">
           <input
             type="checkbox"
-            checked={completed ? true : false}
-            onClick={handleUpdate}
+            checked={completedStatus}
+            onChange={handleUpdate}
             name=""
             id=""
             className="checkbox-input"
           />
           <button 
-            className="edit-button ${completed ? 'color' : null}"
+            className="edit-button ${completedStatus ? 'color' : null}"
             onClick={() => setEditOpened(true)}
           >
             <img src="/pencil.svg" alt="" />
           </button>
           <button
-           className="delete-bin ${completed ? 'color' : null}"
+           className="delete-bin ${completedStatus ? 'color' : null}"
            onClick={() => setIsOpened(true)}
           >
             <img src="/bin.svg" alt="" />
           </button>
         </div>
       </div>
-      <p className={`task-title ${completed ? "line-through" : null}`}>
+      <p className={`task-title ${completedStatus ? "line-through" : null}`}>
         {title}
       </p>
-      <p className={`task-description ${completed ? "line-through" : null}`}>
+      <p className={`task-description ${completedStatus ? "line-through" : null}`}>
         {description}
       </p>
-      <p className={`task-date ${completed ? "line-through" : null}`}>{date}</p>
+      <p className={`task-date ${completedStatus ? "line-through" : null}`}>{date}</p>
       {isOpened && <DeleteModal setIsOpened={setIsOpened} id={id}/>}
       {editOpened && <EditModal setEditOpened={setEditOpened} id={id} />}
     </section>

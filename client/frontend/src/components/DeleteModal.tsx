@@ -5,6 +5,9 @@ import axios from "axios";
 
 // import React from "react"
 const DeleteModal = ({setIsOpened, id}:  {setIsOpened: React.Dispatch<React.SetStateAction<boolean>>, id: number}) => {
+
+  console.log(id)
+
   const queryClient = useQueryClient()
 
   const {
@@ -24,6 +27,7 @@ const DeleteModal = ({setIsOpened, id}:  {setIsOpened: React.Dispatch<React.SetS
   const handleDelete = (e: React.FormEvent) => {
     e.preventDefault()
     // Assuming newData is the data you want to update
+    console.log(note?._id?.toString() ?? '');
     mutation.mutate(note?._id?.toString() ?? '');
   };
 

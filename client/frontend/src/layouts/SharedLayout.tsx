@@ -1,10 +1,21 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AddModal from "../components/AddModal";
 
 const SharedLayout = () => {
+
   const [isOpened, setIsOpened] = useState(false);
+  const navigate = useNavigate();
+
+  const handleNavigation = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if(e.target.checked){
+        navigate("/completed");
+    }else{
+        navigate(-1)
+    }
+  }
+
   return (
     <main className="min-w-screen max-w-screen min-h-screen bg-gray-200 font-roboto font-normal">
       <nav
@@ -52,6 +63,7 @@ const SharedLayout = () => {
             name=""
             id="display"
             className="accent-[#212121] opacity-[36%]"
+            onChange={handleNavigation}
           />
           <label
             htmlFor="display"

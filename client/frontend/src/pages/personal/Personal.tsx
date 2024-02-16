@@ -14,7 +14,7 @@ const Personal = () => {
   const personalNotes = notes?.filter((note) => note.category === "Personal");
   console.log(personalNotes);
 
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading) return <img src="/infinite-spinner.svg" alt="" className="w-2/5 absolute top-[50%] left-[25%]"/>;
 
   if (error) return <h1>Error: {error.message}</h1>;
 

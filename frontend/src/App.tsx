@@ -5,11 +5,15 @@ import Business from "./pages/business/Business";
 import Personal from "./pages/personal/Personal";
 import Home from "./pages/home/Home";
 import CompletedNote from "./pages/completed/CompletedNote";
+import SignUp from "./pages/authentication/SignUp";
+import SignIn from "./pages/authentication/SignIn";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path='/sign-up' element={<SignUp />} />
+        <Route path='/sign-in' element={<SignIn />} />
         <Route element={<SharedLayout />}>
           <Route path="/" element={<All />} />
           <Route path="/business" element={<Business />} />

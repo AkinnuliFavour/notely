@@ -1,21 +1,67 @@
+import { useNavigate } from 'react-router-dom'
+import { useState } from 'react';
 import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
+import { createClient } from '@supabase/supabase-js'
+
 
 function SignIn() {
+
+    const [formState, setFormState] = useState({email: '', password: ''})
+
+    const navigate = useNavigate()
+
+    const supabase = createClient(
+        import.meta.env.VITE_SUPABASE_PROJECT_URL,
+        import.meta.env.VITE_SUPABASE_API_KEY
+    );
+
+    async function signInWithEmail() {
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email: formState.email,
+          password: formState.password,
+        })
+
+        return {data, error}
+      }      
+
+    const handleSignIn = async (e: any) => {
+        e.preventDefault()
+        const { data, error } = await signInWithEmail()
+        if (error) {
+            console.error('Error signing up:', error)
+        } else {
+            console.log('Sign up successful:', data)
+            navigate('/')
+        }
+    }
   return (
-    <section className='w-screen h-screen bg-gray-300 flex flex-col justify-center items-center'>
+    <section className='w-screen h-screen bg-gray-300 flex flex-col justify-center items-center px-4 lg:px-0'>
       <h1 className="text-3xl font-bold mb-4">Sign In</h1>
-      <form className="flex max-w-md flex-col gap-4 w-full">
+      <form className="flex max-w-md flex-col gap-4 w-full" onSubmit={handleSignIn}>
         <div>
-          <div className="mb-2 block">
+            <div className="mb-2 block">
             <Label htmlFor="email1" value="Your email" />
-          </div>
-          <TextInput id="email1" type="email" placeholder="name@flowbite.com" required />
+            </div>
+            <TextInput
+                id="email1"
+                type="email" 
+                placeholder="name@flowbite.com" 
+                value={formState.email}
+                onChange={(e) => setFormState({...formState, email: e.target.value})}
+                required 
+            />
         </div>
         <div>
           <div className="mb-2 block">
             <Label htmlFor="password1" value="Your password" />
           </div>
-          <TextInput id="password1" type="password" required />
+          <TextInput 
+            id="password1" 
+            type="password"
+            value={formState.password}
+            onChange={(e) => setFormState({...formState, password: e.target.value})}
+            required 
+          />
         </div>
         <div className="flex items-center gap-2">
           <Checkbox id="remember" />

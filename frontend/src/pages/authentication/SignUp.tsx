@@ -1,8 +1,9 @@
-import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
+import { Button, Label, TextInput } from 'flowbite-react';
 
 function SignUp() {
   return (
-    <section className='w-screen h-screen bg-gray-300 flex justify-center items-center'>
+    <section className='w-screen h-screen bg-gray-300 flex flex-col justify-center items-center'>
+      <h1 className="text-3xl font-bold mb-4">Sign Up</h1>
       <form className="flex max-w-md flex-col gap-4 w-full">
         <div>
           <div className="mb-2 block">
@@ -15,10 +16,6 @@ function SignUp() {
             <Label htmlFor="password1" value="Your password" />
           </div>
           <TextInput id="password1" type="password" required />
-        </div>
-        <div className="flex items-center gap-2">
-          <Checkbox id="remember" />
-          <Label htmlFor="remember">Remember me</Label>
         </div>
         <Button type="submit">Sign Up</Button>
       </form>

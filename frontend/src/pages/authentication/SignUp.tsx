@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { Button, Label, TextInput } from 'flowbite-react';
 import { createClient } from '@supabase/supabase-js'
 
@@ -32,7 +32,7 @@ function SignUp() {
   }
   
   return (
-    <section className='w-screen h-screen px-4 lg:px-0 bg-gray-300 flex flex-col justify-center items-center'>
+    <section className='w-screen h-screen px-4 lg:px-0 bg-blue-500 flex flex-col justify-center items-center text-white'>
       <h1 className="text-3xl font-bold mb-4">Sign Up</h1>
       <form className="flex max-w-md flex-col gap-4 w-full" onSubmit={handleSignUp}>
         <div>
@@ -59,7 +59,9 @@ function SignUp() {
            onChange={(e) => setFormState({...formState, password: e.target.value})}
            required />
         </div>
-        <Button type="submit">Sign Up</Button>
+        <Button type="submit" className='bg-blue-400 hover:bg-blue-600'>Sign Up</Button>
+
+        <p className='text-center text-white text-base font-semibold'>Already have an account? <Link to='/sign-in'>Sign in to Notely</Link></p>
       </form>
     </section>
   );

@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react';
 import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
 import { createClient } from '@supabase/supabase-js'
@@ -35,12 +35,12 @@ function SignIn() {
         }
     }
   return (
-    <section className='w-screen h-screen bg-gray-300 flex flex-col justify-center items-center px-4 lg:px-0'>
-      <h1 className="text-3xl font-bold mb-4">Sign In</h1>
+    <section className='w-screen h-screen bg-blue-500 flex flex-col justify-center items-center px-4 lg:px-0'>
+      <h1 className="text-3xl font-bold mb-4 text-white">Sign In</h1>
       <form className="flex max-w-md flex-col gap-4 w-full" onSubmit={handleSignIn}>
         <div>
             <div className="mb-2 block">
-            <Label htmlFor="email1" value="Your email" />
+            <Label htmlFor="email1" value="Your email" className='text-white'/>
             </div>
             <TextInput
                 id="email1"
@@ -53,7 +53,7 @@ function SignIn() {
         </div>
         <div>
           <div className="mb-2 block">
-            <Label htmlFor="password1" value="Your password" />
+            <Label htmlFor="password1" value="Your password" className='text-white'/>
           </div>
           <TextInput 
             id="password1" 
@@ -63,11 +63,9 @@ function SignIn() {
             required 
           />
         </div>
-        <div className="flex items-center gap-2">
-          <Checkbox id="remember" />
-          <Label htmlFor="remember">Remember me</Label>
-        </div>
         <Button type="submit">Sign In</Button>
+
+        <Link to='/sign-up' className='text-center text-white text-base font-semibold hover:underline'>Don't have an account? Join Notely</Link>
       </form>
     </section>
   );

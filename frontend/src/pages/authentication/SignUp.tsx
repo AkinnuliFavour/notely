@@ -37,7 +37,7 @@ function SignUp() {
       <form className="flex max-w-md flex-col gap-4 w-full" onSubmit={handleSignUp}>
         <div>
           <div className="mb-2 block">
-            <Label htmlFor="email1" value="Your email" />
+            <Label htmlFor="email1" value="Your email"  className='text-white'/>
           </div>
           <TextInput
             id="email1" 
@@ -50,7 +50,7 @@ function SignUp() {
         </div>
         <div>
           <div className="mb-2 block">
-            <Label htmlFor="password1" value="Your password" />
+            <Label htmlFor="password1" value="Your password" className='text-white'/>
           </div>
           <TextInput
            id="password1" 
@@ -61,7 +61,7 @@ function SignUp() {
         </div>
         <Button type="submit" className='bg-blue-400 hover:bg-blue-600'>Sign Up</Button>
 
-        <p className='text-center text-white text-base font-semibold'>Already have an account? <Link to='/sign-in'>Sign in to Notely</Link></p>
+        <Link to='/sign-in' className='text-center text-white text-base font-semibold hover:underline'>Already have an account? Sign in to Notely</Link>
       </form>
     </section>
   );

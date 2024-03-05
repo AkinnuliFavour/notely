@@ -15,9 +15,9 @@ function App() {
       <Routes>
         <Route path='/sign-up' element={<SignUp />} />
         <Route path='/sign-in' element={<SignIn />} />
-        <Route path='/onboarding' element={<Onboarding />} />
+        <Route path='/' element={<Onboarding />} />
         <Route element={<SharedLayout />}>
-          <Route path="/" element={<All />} />
+          <Route path="/all-tasks" element={<All />} />
           <Route path="/business" element={<Business />} />
           <Route path="/personal" element={<Personal />} />
           <Route path="/home" element={<Home />} />

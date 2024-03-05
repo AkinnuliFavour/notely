@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react';
-import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
+import { Button, Label, TextInput } from 'flowbite-react';
 import { createClient } from '@supabase/supabase-js'
 
 
@@ -31,7 +31,7 @@ function SignIn() {
             console.error('Error signing up:', error)
         } else {
             console.log('Sign up successful:', data)
-            navigate('/')
+            navigate('/all-tasks')
         }
     }
   return (

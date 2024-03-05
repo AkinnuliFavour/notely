@@ -27,7 +27,7 @@ function SignUp() {
         console.error('Error signing up:', error)
       } else {
         console.log('Sign up successful:', data)
-        navigate('/')
+        navigate('/all-tasks')
       }
   }
   

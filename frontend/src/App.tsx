@@ -7,6 +7,7 @@ import Home from "./pages/home/Home";
 import CompletedNote from "./pages/completed/CompletedNote";
 import SignUp from "./pages/authentication/SignUp";
 import SignIn from "./pages/authentication/SignIn";
+import Onboarding from "./onboarding/Onboarding";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path='/sign-up' element={<SignUp />} />
         <Route path='/sign-in' element={<SignIn />} />
+        <Route path='/onboarding' element={<Onboarding />} />
         <Route element={<SharedLayout />}>
           <Route path="/" element={<All />} />
           <Route path="/business" element={<Business />} />

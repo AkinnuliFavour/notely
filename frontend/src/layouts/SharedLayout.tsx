@@ -77,7 +77,7 @@ const SharedLayout = () => {
             <li>
               <Link
                 to="/"
-                className="p-2 text-gray-900 opacity-[60%] hover:opacity-[87%] focus:border-b-2 focus:border-blue-400 focus:text-blue-400 focus:opacity-100 text-[16px] font-medium outline-none"
+                className="p-2 text-gray-900 opacity-[60%] hover:opacity-[87%] focus:border-b-2 focus:border-blue-400 focus:text-blue-400 focus:opacity-100 active:border-blue-400 active:text-blue-400 active;opacity-100 text-[16px] font-medium outline-none"
                 autoFocus={true}
               >
                 All

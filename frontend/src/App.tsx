@@ -8,6 +8,7 @@ import CompletedNote from "./pages/completed/CompletedNote";
 import SignUp from "./pages/authentication/SignUp";
 import SignIn from "./pages/authentication/SignIn";
 import Onboarding from "./onboarding/Onboarding";
+import EmailVerification from "./pages/verification/EmailVerification";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='/sign-up' element={<SignUp />} />
         <Route path='/sign-in' element={<SignIn />} />
         <Route path='/' element={<Onboarding />} />
+        <Route path='/email-verification' element={<EmailVerification />} />
         <Route element={<SharedLayout />}>
           <Route path="/all-tasks" element={<All />} />
           <Route path="/business" element={<Business />} />

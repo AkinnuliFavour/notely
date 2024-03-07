@@ -29,7 +29,6 @@ function SignUp() {
       console.error('Error signing up:', error)
     } else {
       console.log('Sign up successful:', data)
-      navigate('/all-tasks')
     }
 
     // Automatically sign in the user after signing up
@@ -43,6 +42,7 @@ function SignUp() {
         console.error('Error signing in after signing up:', signInError.message);
       } else {
         console.log('Sign in successful after signing up');
+        navigate('/all-tasks')
       }
     }
   }

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom'
 import { Button, Label, TextInput } from 'flowbite-react';
-import { createClient } from '@supabase/supabase-js'
+import { useSupabase } from '../../utils/useSupabaseContext';
 
 function SignUp() {
 
@@ -9,9 +9,10 @@ function SignUp() {
 
   const navigate = useNavigate()
 
-  const supabase = createClient(import.meta.env.VITE_SUPABASE_PROJECT_URL, import.meta.env.VITE_SUPABASE_API_KEY)
+  const supabase = useSupabase()
 
   async function signUpNewUser() {
+    if (!supabase) return
     const { data, error } = await supabase.auth.signUp({
       email: formState.email,
       password: formState.password,
@@ -22,7 +23,8 @@ function SignUp() {
 
   const handleSignUp = async (e: any) => {
       e.preventDefault()
-      const { data, error } = await signUpNewUser()
+      const response = await signUpNewUser();
+      const { data, error } = response ?? {};
       if (error) {
         console.error('Error signing up:', error)
       } else {

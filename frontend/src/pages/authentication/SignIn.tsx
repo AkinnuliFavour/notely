@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react';
 import { Button, Label, TextInput } from 'flowbite-react';
-import { createClient } from '@supabase/supabase-js'
+import { useSupabase } from '../../utils/useSupabaseContext';
 
 
 function SignIn() {
@@ -10,23 +10,22 @@ function SignIn() {
 
     const navigate = useNavigate()
 
-    const supabase = createClient(
-        import.meta.env.VITE_SUPABASE_PROJECT_URL,
-        import.meta.env.VITE_SUPABASE_API_KEY
-    );
+    const supabase = useSupabase()
 
     async function signInWithEmail() {
-        const { data, error } = await supabase.auth.signInWithPassword({
-          email: formState.email,
-          password: formState.password,
-        })
+      if (!supabase) return
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: formState.email,
+        password: formState.password,
+      })
 
-        return {data, error}
-      }      
+      return {data, error}
+    }      
 
     const handleSignIn = async (e: any) => {
         e.preventDefault()
-        const { data, error } = await signInWithEmail()
+      const response = await signInWithEmail();
+      const { data, error } = response ?? {};
         if (error) {
             console.error('Error signing up:', error)
         } else {

@@ -33,10 +33,18 @@ function SignUp() {
     }
 
     // Automatically sign in the user after signing up
-    await supabase?.auth.signInWithPassword({
-      email: formState.email,
-      password: formState.password
-    })
+    if (supabase) {
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email: formState.email,
+        password: formState.password
+      })
+
+      if (signInError) {
+        console.error('Error signing in after signing up:', signInError.message);
+      } else {
+        console.log('Sign in successful after signing up');
+      }
+    }
   }
 
   return (

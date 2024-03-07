@@ -6,63 +6,64 @@ import { useSupabase } from '../../utils/useSupabaseContext';
 
 function SignIn() {
 
-    const [formState, setFormState] = useState({email: '', password: ''})
+  const [formState, setFormState] = useState({ email: '', password: '' })
 
-    const navigate = useNavigate()
+  const navigate = useNavigate()
 
-    const supabase = useSupabase()
+  const supabase = useSupabase()
 
-    async function signInWithEmail() {
-      if (!supabase) return
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: formState.email,
-        password: formState.password,
-      })
+  async function signInWithEmail() {
+    if (!supabase) return
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: formState.email,
+      password: formState.password,
+    })
 
-      return {data, error}
-    }      
+    return { data, error }
+  }
 
-    const handleSignIn = async (e: any) => {
-        e.preventDefault()
-      const response = await signInWithEmail();
-      const { data, error } = response ?? {};
-        if (error) {
-            console.error('Error signing up:', error)
-        } else {
-            console.log('Sign up successful:', data)
-            navigate('/all-tasks')
-        }
+  const handleSignIn = async (e: any) => {
+    e.preventDefault()
+    const response = await signInWithEmail();
+    const { data, error } = response ?? {};
+    if (error) {
+      console.error('Error signing up:', error)
+    } else {
+      console.log('Sign up successful:', data)
+      navigate('/all-tasks')
     }
+  }
+
   return (
     <section className='w-screen h-screen bg-blue-500 flex flex-col justify-center items-center px-4 lg:px-0'>
       <h1 className="text-3xl font-bold mb-4 text-white">Sign In</h1>
       <form className="flex max-w-md flex-col gap-4 w-full" onSubmit={handleSignIn}>
         <div>
-            <div className="mb-2 block">
-            <Label htmlFor="email1" value="Your email" className='text-white'/>
-            </div>
-            <TextInput
-                id="email1"
-                type="email" 
-                placeholder="name@flowbite.com" 
-                value={formState.email}
-                onChange={(e) => setFormState({...formState, email: e.target.value})}
-                required 
-            />
+          <div className="mb-2 block">
+            <Label htmlFor="email1" value="Your email" className='text-white' />
+          </div>
+          <TextInput
+            id="email1"
+            type="email"
+            placeholder="name@flowbite.com"
+            value={formState.email}
+            onChange={(e) => setFormState({ ...formState, email: e.target.value })}
+            required
+          />
         </div>
         <div>
           <div className="mb-2 block">
-            <Label htmlFor="password1" value="Your password" className='text-white'/>
+            <Label htmlFor="password1" value="Your password" className='text-white' />
           </div>
-          <TextInput 
-            id="password1" 
+          <TextInput
+            id="password1"
             type="password"
             value={formState.password}
-            onChange={(e) => setFormState({...formState, password: e.target.value})}
-            required 
+            onChange={(e) => setFormState({ ...formState, password: e.target.value })}
+            required
           />
         </div>
-        <Button type="submit">Sign In</Button>
+        <Button type="submit" className='bg-blue-400 hover:bg-blue-600'>Sign In</Button>
 
         <Link to='/sign-up' className='text-center text-white text-base font-semibold hover:underline'>Don't have an account? Join Notely</Link>
       </form>

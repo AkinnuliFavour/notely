@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import AddModal from "../components/AddModal";
 
 const SharedLayout = () => {
@@ -9,10 +8,10 @@ const SharedLayout = () => {
   const navigate = useNavigate();
 
   const handleNavigation = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if(e.target.checked){
-        navigate("/completed");
-    }else{
-        navigate(-1)
+    if (e.target.checked) {
+      navigate("/completed");
+    } else {
+      navigate(-1)
     }
   }
 
@@ -75,37 +74,37 @@ const SharedLayout = () => {
         <div className="mt-8 w-full" data-aos="fade-down">
           <ul className="w-full py-[5px] flex justify-between text-center border-collapse border-b-2 border-black/[.02]">
             <li>
-              <Link
-                to="/"
-                className="p-2 text-gray-900 opacity-[60%] hover:opacity-[87%] focus:border-b-2 focus:border-blue-400 focus:text-blue-400 focus:opacity-100 active:border-blue-400 active:text-blue-400 active;opacity-100 text-[16px] font-medium outline-none"
+              <NavLink
+                to="/all-tasks"
+                className={({ isActive }) => `${isActive && `text-blue-600`} text-[16px] font-medium outline-none px-2 text-gray-900 opacity-60 hover:opacity-[87%] focus:text-blue-400 focus:opacity-100 `}
                 autoFocus={true}
               >
                 All
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 to="/personal"
-                className="p-2 text-gray-900 opacity-[60%] hover:opacity-[87%] focus:border-b-2 focus:border-blue-400 focus:text-blue-400 focus:opacity-100 text-[16px] font-medium outline-none"
+                className={({ isActive }) => `${isActive && `text-blue-600`} text-[16px] font-medium outline-none px-2 text-gray-900 opacity-60 hover:opacity-[87%] focus:text-blue-400 focus:opacity-100 `}
               >
                 PERSONAL
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 to="/home"
-                className="p-2 text-gray-900 opacity-[60%] hover:opacity-[87%] focus:border-b-2 focus:border-blue-400 focus:text-blue-400 focus:opacity-100 text-[16px] font-medium outline-none"
+                className={({ isActive }) => `${isActive && `text-blue-600`} text-[16px] font-medium outline-none px-2 text-gray-900 opacity-60 hover:opacity-[87%] focus:text-blue-400 focus:opacity-100 `}
               >
                 HOME
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 to="/business"
-                className="p-2 text-gray-900 opacity-[60%] hover:opacity-[87%] focus:border-b-2 focus:border-blue-400 focus:text-blue-400 focus:opacity-100 text-[16px] font-medium outline-none"
+                className={({ isActive }) => `${isActive && `text-blue-600`} text-[16px] font-medium outline-none px-2 text-gray-900 opacity-60 hover:opacity-[87%] focus:text-blue-400 focus:opacity-100 `}
               >
                 BUSINESS
-              </Link>
+              </NavLink>
             </li>
           </ul>
         </div>
@@ -115,7 +114,7 @@ const SharedLayout = () => {
         </section>
       </section>
       {isOpened && <AddModal setIsOpened={setIsOpened} />}
-    </main>
+    </main >
   );
 };
 

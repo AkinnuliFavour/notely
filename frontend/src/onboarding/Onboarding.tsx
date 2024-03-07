@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 const Onboarding = () => {
 
   const navigate = useNavigate()
-  
+
   return (
     <main className="max-w-screen min-h-screen pb-8 bg-blue-500">
       <nav className="border-b border-blue-400 px-2 py-4 h-1/5">
@@ -20,15 +20,15 @@ const Onboarding = () => {
         </p>
         <div className="flex justify-center mt-8">
           <button
-           className="bg-white text-blue-500 px-4 py-2 rounded-lg"
-           onClick={() => navigate("/sign-up")}
+            className="bg-white text-blue-500 px-4 py-2 rounded-lg"
+            onClick={() => navigate("/sign-in")}
           >
             Get Started
           </button>
         </div>
       </div>
       <div className="mt-12 flex justify-center items-center">
-        <img src="/Screenshot.png" alt="website screenshot" className="px-4 lg:px-0 lg:w-3/4 rounded-xl"/>
+        <img src="/Screenshot.png" alt="website screenshot" className="px-4 lg:px-0 lg:w-3/4 rounded-xl" />
       </div>
     </main>
   )

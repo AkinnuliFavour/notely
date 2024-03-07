@@ -1,13 +1,11 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Button, Label, TextInput } from 'flowbite-react';
 import { useSupabase } from '../../utils/useSupabaseContext';
 
 function SignUp() {
 
   const [formState, setFormState] = useState({ email: '', password: '' })
-
-  const navigate = useNavigate()
 
   const supabase = useSupabase()
 
@@ -29,21 +27,6 @@ function SignUp() {
       console.error('Error signing up:', error)
     } else {
       console.log('Sign up successful:', data)
-    }
-
-    // Automatically sign in the user after signing up
-    if (supabase) {
-      const { error: signInError } = await supabase.auth.signInWithPassword({
-        email: formState.email,
-        password: formState.password
-      })
-
-      if (signInError) {
-        console.error('Error signing in after signing up:', signInError.message);
-      } else {
-        console.log('Sign in successful after signing up');
-        navigate('/all-tasks')
-      }
     }
   }
 

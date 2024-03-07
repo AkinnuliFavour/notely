@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom'
 import { Button, Label, TextInput } from 'flowbite-react';
 import { useSupabase } from '../../utils/useSupabaseContext';
+import { toast, Bounce, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function SignUp() {
 
@@ -27,8 +29,21 @@ function SignUp() {
       console.error('Error signing up:', error)
     } else {
       console.log('Sign up successful:', data)
+      notify()
     }
   }
+
+  const notify = () => toast.info('A confirmation link has been sent to your email!', {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+    transition: Bounce,
+  });
 
   return (
     <section className='w-screen h-screen px-4 lg:px-0 bg-blue-500 flex flex-col justify-center items-center text-white'>
@@ -62,6 +77,8 @@ function SignUp() {
 
         <Link to='/sign-in' className='text-center text-white text-base font-semibold hover:underline'>Already have an account? Sign in to Notely</Link>
       </form>
+
+      <ToastContainer />
     </section>
   );
 }

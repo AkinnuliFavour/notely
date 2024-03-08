@@ -4,8 +4,10 @@ const Note = require('../models/Note')
 // @route GET /notes
 // @access Private
 const getAllNotes = async (req, res) => {
-    // Get all notes from MongoDB
-    const notes = await Note.find().lean()
+    const { userId } = req.body
+
+    // Get all user's notes from MongoDB
+    const notes = await Note.find({ 'userId': userId }).lean()
 
     // If no notes 
     if (!notes?.length) {
@@ -19,10 +21,10 @@ const getAllNotes = async (req, res) => {
 // @route POST /notes
 // @access Private
 const createNewNote = async (req, res) => {
-    const { title, category, description } = req.body
+    const { userId, title, category, description } = req.body
 
     // Confirm data
-    if (!title || !category || !description) {
+    if (!userId || !title || !category || !description) {
         return res.status(400).json({ message: 'All fields are required' })
     }
 
@@ -33,7 +35,7 @@ const createNewNote = async (req, res) => {
         return res.status(409).json({ message: 'Duplicate note title' })
     }
 
-    // Create and store the new user 
+    // Create and store the new note 
     const note = await Note.create({ title, category, description })
 
     if (note) { // Created 
@@ -48,10 +50,10 @@ const createNewNote = async (req, res) => {
 // @route PATCH /notes
 // @access Private
 const updateNote = async (req, res) => {
-    const { id, title, category, description, completed } = req.body
+    const { id, userId, title, category, description, completed } = req.body
 
     // Confirm data
-    if (!id || !title || !category || !description || typeof completed !== 'boolean') {
+    if (!id || !userId || !title || !category || !description || typeof completed !== 'boolean') {
         return res.status(400).json({ message: 'All fields are required' })
     }
 

@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import Note from "../../components/Note";
 import { fetchNotes } from "../../utils/fetchNotes";
 import { Notes } from "../../types";
+import Logout from "../../components/Logout";
 
 const Personal = () => {
 
@@ -14,7 +15,7 @@ const Personal = () => {
   const personalNotes = notes?.filter((note) => note.category === "Personal");
   console.log(personalNotes);
 
-  if (isLoading) return <img src="/infinite-spinner.svg" alt="" className="w-2/5 absolute top-[50%] left-[25%]"/>;
+  if (isLoading) return <img src="/infinite-spinner.svg" alt="" className="w-2/5 absolute top-[50%] left-[25%]" />;
 
   if (error) return <h1>Error: {error.message}</h1>;
 
@@ -31,6 +32,8 @@ const Personal = () => {
           completed={note.completed}
         />
       ))}
+
+      <Logout />
     </>
   );
 };

@@ -2,36 +2,39 @@ import { useQuery } from "@tanstack/react-query";
 import { Notes } from "../../types";
 import { fetchNotes } from "../../utils/fetchNotes";
 import Note from "../../components/Note";
+import Logout from "../../components/Logout";
 
 const CompletedNote = () => {
 
-    const {
-        data: notes,
-        error,
-        isLoading,
-      } = useQuery<Notes>({ queryKey: ["notes"], queryFn: fetchNotes });
-    
-      const completedNotes = notes?.filter((note) => note.completed === true);
-      console.log(completedNotes);
-    
-      if (isLoading) return <img src="/infinite-spinner.svg" alt="" className="w-2/5 absolute top-[50%] left-[25%]"/>;
-    
-      if (error) return <h1>Error: {error.message}</h1>;
+  const {
+    data: notes,
+    error,
+    isLoading,
+  } = useQuery<Notes>({ queryKey: ["notes"], queryFn: fetchNotes });
+
+  const completedNotes = notes?.filter((note) => note.completed === true);
+  console.log(completedNotes);
+
+  if (isLoading) return <img src="/infinite-spinner.svg" alt="" className="w-2/5 absolute top-[50%] left-[25%]" />;
+
+  if (error) return <h1>Error: {error.message}</h1>;
 
   return (
     <>
-    {completedNotes?.map((note) => (
-      <Note
-        key={note._id}
-        id={note._id}
-        category={note.category}
-        title={note.title}
-        description={note.description}
-        date={note.date}
-        completed={note.completed}
-      />
-    ))}
-  </>
+      {completedNotes?.map((note) => (
+        <Note
+          key={note._id}
+          id={note._id}
+          category={note.category}
+          title={note.title}
+          description={note.description}
+          date={note.date}
+          completed={note.completed}
+        />
+      ))}
+
+      <Logout />
+    </>
   );
 }
 

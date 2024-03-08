@@ -11,6 +11,7 @@ import Onboarding from "./onboarding/Onboarding";
 import EmailVerification from "./pages/verification/EmailVerification";
 
 function App() {
+
   return (
     <BrowserRouter>
       <Routes>

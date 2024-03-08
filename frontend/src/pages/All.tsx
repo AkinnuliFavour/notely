@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import Note from "../components/Note";
 import { fetchNotes } from "../utils/fetchNotes";
 import { Notes } from "../types";
+import Logout from "../components/Logout";
 
 const All = () => {
 
@@ -11,7 +12,7 @@ const All = () => {
     isLoading,
   } = useQuery<Notes>({ queryKey: ["notes"], queryFn: fetchNotes });
 
-  if (isLoading) return <img src="/infinite-spinner.svg" alt="" className="w-2/5 absolute top-[50%] left-[25%]"/>;
+  if (isLoading) return <img src="/infinite-spinner.svg" alt="" className="w-2/5 absolute top-[50%] left-[25%]" />;
 
   if (error) return <h1>Error: {error.message}</h1>;
 
@@ -30,6 +31,7 @@ const All = () => {
           completed={note.completed}
         />
       ))}
+      <Logout />
     </>
   );
 };

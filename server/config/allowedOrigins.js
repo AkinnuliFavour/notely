@@ -1,7 +1,7 @@
 const allowedOrigins = [
    'http://localhost:5173',
    'https://notely-frontend.vercel.app',
-   'https://crispy-space-fiesta-69v94x664x434rrr-5173.app.github.dev',
+   'https://supreme-parakeet-7q4944vj6x72xvw7-5174.app.github.dev',
    'https://notely-react-frontend.vercel.app'
 ]
 

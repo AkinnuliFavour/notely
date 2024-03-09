@@ -23,6 +23,9 @@ const getAllNotes = async (req, res) => {
 const createNewNote = async (req, res) => {
     const { userId, title, category, description } = req.body
 
+
+    console.log(req.body)
+
     // Confirm data
     if (!userId || !title || !category || !description) {
         return res.status(400).json({ message: 'All fields are required' })

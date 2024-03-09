@@ -2,15 +2,17 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import axios from "axios";
+import { User } from "@supabase/supabase-js";
 
-type FormType = {
+export interface FormType {
+  userId: number;
   title: string;
   category: string;
   description: string;
   completed: boolean;
 };
 
-const AddModal = ({ setIsOpened }:  { setIsOpened: React.Dispatch<React.SetStateAction<boolean>> }) => {
+const AddModal = ({ setIsOpened, currentUser }: { setIsOpened: React.Dispatch<React.SetStateAction<boolean>>, currentUser: User }) => {
   const queryClient = useQueryClient()
 
   // const [formData, setFormData] = useState({
@@ -24,17 +26,18 @@ const AddModal = ({ setIsOpened }:  { setIsOpened: React.Dispatch<React.SetState
   const [category, setCategory] = useState("Personal")
   const [description, setDescription] = useState("")
 
-const createData = async (data: FormType) => {
-  const response = await axios.post("https://notely-orcin.vercel.app/notes/", data);
-  return response.data; // Assuming your API returns updated data
-};
+  const createData = async (data: FormType) => {
+    const response = await axios.post("https://notely-orcin.vercel.app/notes/", data);
+    return response.data; // Assuming your API returns updated data
+  };
 
-const mutation = useMutation({mutationFn: createData});
+  const mutation = useMutation({ mutationFn: createData });
 
   const handlePost = (e: React.FormEvent) => {
     e.preventDefault()
     // Assuming newData is the data you want to update
     mutation.mutate({
+      userId: Number(currentUser.id),
       title,
       category,
       description,
@@ -48,61 +51,60 @@ const mutation = useMutation({mutationFn: createData});
     queryClient.invalidateQueries({ queryKey: ["notes"] });
     console.log("Success");
   }
-    return (
-      <main className="w-full h-full backdrop top-0 left-0">
-        <section className="modal">
-          <p className="heading">Add Note</p>
-          <form action="" className="modal-form" onSubmit={handlePost}>
-            <div className="input-container">
-              <label htmlFor="title">Title</label>
-              <input
-               type="text" 
-               id="title" 
-               name="title" 
-               value={title}
-               onChange={(e) => setTitle(e.target.value)}
-               className="title-input"
-              />
-            </div>
-            <div className="input-container">
-              <label htmlFor="category">Category</label>
-              <select
-                name="category"
-                id="category" 
-                className="category-input"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)} 
-              >
-                <option value="Personal">Personal</option>
-                <option value="Home">Home</option>
-                <option value="Business">Business</option>
-              </select>
-            </div>
-            <div className="input-cotainer description-container flex flex-col">
-              <label htmlFor="content">Description(optional)</label>
-              <textarea 
-                name="content" 
-                id="content" 
-                maxLength={180} 
-                cols={30} 
-                rows={10}
-                placeholder="Add a description... (Max 180 characters)"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                className="description-input" 
-              >
+  return (
+    <main className="w-full h-full backdrop top-0 left-0">
+      <section className="modal">
+        <p className="heading">Add Note</p>
+        <form action="" className="modal-form" onSubmit={handlePost}>
+          <div className="input-container">
+            <label htmlFor="title">Title</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="title-input"
+            />
+          </div>
+          <div className="input-container">
+            <label htmlFor="category">Category</label>
+            <select
+              name="category"
+              id="category"
+              className="category-input"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option value="Personal">Personal</option>
+              <option value="Home">Home</option>
+              <option value="Business">Business</option>
+            </select>
+          </div>
+          <div className="input-cotainer description-container flex flex-col">
+            <label htmlFor="content">Description(optional)</label>
+            <textarea
+              name="content"
+              id="content"
+              maxLength={180}
+              cols={30}
+              rows={10}
+              placeholder="Add a description... (Max 180 characters)"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              className="description-input"
+            >
 
-              </textarea>
-            </div>
-            <div className="button-container">
-              <button type="submit" className="cancel-button" onClick={() => setIsOpened(false)}>Cancel</button>
-              <button type="button" className="add-button px-6" onClick={handlePost}>Add</button>
-            </div>
-          </form>
-        </section>
-      </main>
-    )
-  }
-  
-  export default AddModal
-  
+            </textarea>
+          </div>
+          <div className="button-container">
+            <button type="submit" className="cancel-button" onClick={() => setIsOpened(false)}>Cancel</button>
+            <button type="button" className="add-button px-6" onClick={handlePost}>Add</button>
+          </div>
+        </form>
+      </section>
+    </main>
+  )
+}
+
+export default AddModal

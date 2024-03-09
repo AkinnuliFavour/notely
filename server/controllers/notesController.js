@@ -36,7 +36,7 @@ const createNewNote = async (req, res) => {
     }
 
     // Create and store the new note 
-    const note = await Note.create({ title, category, description })
+    const note = await Note.create({ userId, title, category, description })
 
     if (note) { // Created 
         return res.status(201).json({ message: 'New note created' })

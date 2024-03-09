@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import AddModal from "../../components/AddModal";
-import { User } from "@supabase/supabase-js";
 
-const StaticLayout = ({ currentUser }: { currentUser: User }) => {
+const StaticLayout = () => {
     const [isOpened, setIsOpened] = useState(false);
     const navigate = useNavigate();
 
@@ -113,7 +112,7 @@ const StaticLayout = ({ currentUser }: { currentUser: User }) => {
                     <Outlet />
                 </section>
             </section>
-            {isOpened && <AddModal setIsOpened={setIsOpened} currentUser={currentUser} />}
+            {isOpened && <AddModal setIsOpened={setIsOpened} />}
         </main >
     )
 }

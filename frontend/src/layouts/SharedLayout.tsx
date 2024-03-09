@@ -1,12 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import StaticLayout from "./components/StaticLayout";
 import { useSupabase } from "../utils/useSupabaseContext";
-import { User } from "@supabase/supabase-js";
 
 const SharedLayout = () => {
-
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
 
   const supabase = useSupabase()
   const navigate = useNavigate()
@@ -15,7 +12,7 @@ const SharedLayout = () => {
     if (supabase) {
       try {
         const { data: { user } } = await supabase.auth.getUser()
-        setCurrentUser(user)
+        localStorage.setItem('currentUser', JSON.stringify(user))
         return user;
       } catch (err) {
         if (err instanceof Error) {
@@ -32,7 +29,7 @@ const SharedLayout = () => {
     const fetchCurrentUser = async () => {
       try {
         const user = await getCurrentUser()
-        if (user === undefined || user === null || currentUser === null) {
+        if (user === undefined || user === null) {
           return navigate('/sign-in');
         }
       } catch (err) {
@@ -43,11 +40,7 @@ const SharedLayout = () => {
     fetchCurrentUser()
   }, []);
 
-  if (currentUser !== null) {
-    return (
-      <StaticLayout currentUser={currentUser} />
-    )
-  }
+  return <StaticLayout />
 };
 
 export default SharedLayout;

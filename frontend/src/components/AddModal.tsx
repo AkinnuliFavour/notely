@@ -2,7 +2,6 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import axios from "axios";
-import { User } from "@supabase/supabase-js";
 
 export interface FormType {
   userId: number;
@@ -12,8 +11,11 @@ export interface FormType {
   completed: boolean;
 };
 
-const AddModal = ({ setIsOpened, currentUser }: { setIsOpened: React.Dispatch<React.SetStateAction<boolean>>, currentUser: User }) => {
+const AddModal = ({ setIsOpened }: { setIsOpened: React.Dispatch<React.SetStateAction<boolean>> }) => {
   const queryClient = useQueryClient()
+
+  const currentUser = JSON.parse(localStorage.getItem("currentUser") || "{}");
+  console.log(currentUser.id);
 
   // const [formData, setFormData] = useState({
   //   id,

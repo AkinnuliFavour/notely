@@ -1,15 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
 import axios from "axios";
 import Note from "../components/Note";
 import { Notes } from "../types";
 import Logout from "../components/Logout";
 
 const All = () => {
-  const { userId } = useParams();
 
   const fetchNotes = async () => {
-    const response = await axios.post("https://notely-orcin.vercel.app/notes/", userId);
+    const response = await axios.get("http://localhost:3500/notes/");
     return response.data; // Assuming API returns requested data
   };
 

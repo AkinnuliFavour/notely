@@ -4,18 +4,22 @@ import { useState } from "react";
 import axios from "axios";
 
 export interface FormType {
-  userId: number;
+  userId: string;
   title: string;
   category: string;
   description: string;
   completed: boolean;
 };
 
+interface userObject {
+  id: string
+}
+
 const AddModal = ({ setIsOpened }: { setIsOpened: React.Dispatch<React.SetStateAction<boolean>> }) => {
   const queryClient = useQueryClient()
 
-  const currentUser = JSON.parse(localStorage.getItem("currentUser") || "{}");
-  console.log(currentUser.id);
+  const currentUser : userObject = JSON.parse(localStorage.getItem("currentUser") || "{}");
+  console.log(typeof(currentUser.id));
 
   // const [formData, setFormData] = useState({
   //   id,
@@ -29,7 +33,8 @@ const AddModal = ({ setIsOpened }: { setIsOpened: React.Dispatch<React.SetStateA
   const [description, setDescription] = useState("")
 
   const createData = async (data: FormType) => {
-    const response = await axios.post("https://notely-orcin.vercel.app/notes/", data);
+    console.log(data)
+    const response = await axios.post("http://localhost:3500/notes/", data);
     return response.data; // Assuming your API returns updated data
   };
 
@@ -39,7 +44,7 @@ const AddModal = ({ setIsOpened }: { setIsOpened: React.Dispatch<React.SetStateA
     e.preventDefault()
     // Assuming newData is the data you want to update
     mutation.mutate({
-      userId: Number(currentUser.id),
+      userId: currentUser.id,
       title,
       category,
       description,
@@ -49,7 +54,7 @@ const AddModal = ({ setIsOpened }: { setIsOpened: React.Dispatch<React.SetStateA
 
 
   if (mutation.isSuccess) {
-    setIsOpened(false);
+    setIsOpened(prev => !prev);
     queryClient.invalidateQueries({ queryKey: ["notes"] });
     console.log("Success");
   }

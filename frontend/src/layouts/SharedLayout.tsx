@@ -10,8 +10,8 @@ const SharedLayout = () => {
 
   const getCurrentUser = async () => {
     if (supabase) {
-      try {
-        const { data: { user } } = await supabase.auth.getUser()
+      try { 
+      const { data: { user } } = await supabase.auth.getUser()
         localStorage.setItem('currentUser', JSON.stringify(user))
         return user;
       } catch (err) {

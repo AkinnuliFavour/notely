@@ -1,6 +1,5 @@
 export type Notes = {
   _id: number;
-  userId: number;
   category: string;
   title: string;
   description: string;
@@ -10,7 +9,6 @@ export type Notes = {
 
 export type NoteProps = {
   id: number;
-  userId: number;
   category: string;
   title: string;
   description: string;
@@ -24,4 +22,4 @@ export type FormData = {
   category: string;
   description: string;
   completed: boolean;
-}
+};

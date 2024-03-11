@@ -4,7 +4,13 @@ const Note = require('../models/Note')
 // @route GET /notes
 // @access Private
 const getAllNotes = async (req, res) => {
-    const { userId } = req.body
+    const userId = req.query.userId
+    console.log(userId)
+
+    // Confirm data
+    if (!userId) {
+        return res.status(400).json({ message: 'userId is required' })
+    }
 
     // Get all user's notes from MongoDB
     const notes = await Note.find({ 'userId': userId }).lean()

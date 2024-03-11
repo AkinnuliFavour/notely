@@ -18,8 +18,8 @@ interface userObject {
 const AddModal = ({ setIsOpened }: { setIsOpened: React.Dispatch<React.SetStateAction<boolean>> }) => {
   const queryClient = useQueryClient()
 
-  const currentUser : userObject = JSON.parse(localStorage.getItem("currentUser") || "{}");
-  console.log(typeof(currentUser.id));
+  const currentUser: userObject = JSON.parse(localStorage.getItem("currentUser") || "{}");
+  console.log(typeof (currentUser.id));
 
   // const [formData, setFormData] = useState({
   //   id,
@@ -50,11 +50,11 @@ const AddModal = ({ setIsOpened }: { setIsOpened: React.Dispatch<React.SetStateA
       description,
       completed: false
     });
+    setIsOpened(false);
   };
 
 
   if (mutation.isSuccess) {
-    setIsOpened(prev => !prev);
     queryClient.invalidateQueries({ queryKey: ["notes"] });
     console.log("Success");
   }

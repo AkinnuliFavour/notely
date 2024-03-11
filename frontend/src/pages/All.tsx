@@ -10,7 +10,9 @@ const All = () => {
   console.log(userId);
 
   const fetchNotes = async () => {
-    const response = await axios.get(`http://localhost:3500/notes?userId=${userId}`);
+    const response = await axios.get(
+      `https://k8437h-3500.csb.app/notes?userId=${userId}`,
+    );
     return response.data; // Assuming API returns requested data
   };
 
@@ -20,7 +22,14 @@ const All = () => {
     isLoading,
   } = useQuery<Notes>({ queryKey: ["notes"], queryFn: fetchNotes });
 
-  if (isLoading) return <img src="/infinite-spinner.svg" alt="" className="w-2/5 absolute top-[50%] left-[25%]" />;
+  if (isLoading)
+    return (
+      <img
+        src="/infinite-spinner.svg"
+        alt=""
+        className="w-2/5 absolute top-[50%] left-[25%]"
+      />
+    );
 
   if (error) return <h1>Error: {error.message}</h1>;
 

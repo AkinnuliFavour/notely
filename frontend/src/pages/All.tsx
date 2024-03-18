@@ -5,13 +5,13 @@ import { Notes } from "../types";
 import Logout from "../components/Logout";
 
 const All = () => {
-  const currentUser = JSON.parse(localStorage.getItem("currentUser") || "{}");
-  const userId: string = currentUser.id;
-  console.log(userId);
+  const currentUser = JSON.parse(localStorage.getItem("user") || "{}");
+  console.log(currentUser.user.id);
+  const userId = currentUser.user.id;
 
   const fetchNotes = async () => {
     const response = await axios.get(
-      `https://k8437h-3500.csb.app/notes?userId=${userId}`,
+      `http://localhost:3500/notes?userId=${userId}`,
     );
     return response.data; // Assuming API returns requested data
   };
@@ -41,7 +41,6 @@ const All = () => {
         <Note
           key={note._id}
           id={note._id}
-          userId={note.userId}
           category={note.category}
           title={note.title}
           description={note.description}

@@ -19,6 +19,10 @@ function SignIn() {
       password: formState.password,
     })
 
+    if (typeof (data) !== null) {
+      localStorage.setItem('user', JSON.stringify(data))
+    }
+
     return { data, error }
   }
 

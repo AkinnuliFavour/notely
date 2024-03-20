@@ -6,7 +6,7 @@ import { fetchNotes } from "../utils/fetchNotes";
 import { Notes } from "../types";
 import { FormData } from "../types";
 
-const EditModal = ({setEditOpened, id}:  {setEditOpened: React.Dispatch<React.SetStateAction<boolean>>, id: number}) => {
+const EditModal = ({handleCloseEditModal, id}:  {handleCloseEditModal: () => void, id: number}) => {
 
   const queryClient = useQueryClient()
 
@@ -27,6 +27,9 @@ const EditModal = ({setEditOpened, id}:  {setEditOpened: React.Dispatch<React.Se
   const [category, setCategory] = useState("Personal")
   const [description, setDescription] = useState("")
 
+  const userId = JSON.parse(localStorage.getItem("user") || "{}")?.user?.id;
+  console.log(userId)
+
 useEffect(() => {
   if(note) {
     setTitle(note.title)
@@ -37,27 +40,34 @@ useEffect(() => {
 , [note])
 
 const updateData = async (data: FormData) => {
-  const response = await axios.put(`https://notely-orcin.vercel.app/notes/`, data);
+  const response = await axios.put(`http://localhost:3500/notes/`, data);
   return response.data; // Assuming your API returns updated data
 };
 
-const mutation = useMutation({mutationFn: updateData});
+const mutation = useMutation({
+  mutationFn: updateData,
+  onSuccess: () => {
+    queryClient.invalidateQueries({ queryKey: ["notes"] });
+  }
+});
 
   const handleUpdate = (e: React.FormEvent) => {
     e.preventDefault()
     // Assuming newData is the data you want to update
     mutation.mutate({
       id, 
+      userId,
       title, 
       category, 
       description,  
       completed: note ? note.completed : false
     });
+    
+    handleCloseEditModal()
   };
 
 
   if (mutation.isSuccess) {
-    setEditOpened(false);
     queryClient.invalidateQueries({ queryKey: ["notes"] });
     console.log("Success");
   }
@@ -66,7 +76,7 @@ const mutation = useMutation({mutationFn: updateData});
       <main className="w-full h-full backdrop top-0 left-0">
         <section className="modal">
           <p className="heading">Edit Note</p>
-          <form action="" className="modal-form">
+          <form action="" className="modal-form" onSubmit={handleUpdate}>
             <div className="input-container">
               <label htmlFor="title">Title</label>
               <input
@@ -109,11 +119,11 @@ const mutation = useMutation({mutationFn: updateData});
               </textarea>
             </div>
             <div className="button-container">
-              <button type="submit" className="cancel-button" onClick={() => setEditOpened(false)}>Cancel</button>
+              <button type="button" className="cancel-button" onClick={() => handleCloseEditModal()}>Cancel</button>
               <button 
-                type="button" 
+                type="submit" 
                 className="add-button px-6"
-                onClick={handleUpdate}
+               
               >
                 Edit
               </button>

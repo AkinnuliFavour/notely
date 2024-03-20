@@ -11,6 +11,12 @@ const Note = ({ id, category, title, description, date, completed }: NoteProps) 
   const [editOpened, setEditOpened] = useState(false);
   const [completedStatus, setCompletedStatus] = useState(completed);
 
+  const userId = JSON.parse(localStorage.getItem("user") || "{}")?.user?.id;
+
+  const handleCloseEditModal = () => {
+    setEditOpened(prev => !prev);
+  }
+
   const queryClient = useQueryClient();
 
   const updateData = async (data: FormData) => {
@@ -25,6 +31,7 @@ const Note = ({ id, category, title, description, date, completed }: NoteProps) 
     // Assuming newData is the data you want to update
     mutation.mutate({
       id, 
+      userId,
       title, 
       category, 
       description,  
@@ -74,7 +81,7 @@ const Note = ({ id, category, title, description, date, completed }: NoteProps) 
       </p>
       <p className={`task-date ${completedStatus ? "line-through" : null}`}>{date}</p>
       {isOpened && <DeleteModal setIsOpened={setIsOpened} id={id}/>}
-      {editOpened && <EditModal setEditOpened={setEditOpened} id={id} />}
+      {editOpened && <EditModal handleCloseEditModal={handleCloseEditModal} id={id} />}
     </section>
   );
 };

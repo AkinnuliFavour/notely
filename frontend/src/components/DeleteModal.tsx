@@ -29,7 +29,7 @@ const DeleteModal = ({setIsOpened, id}:  {setIsOpened: React.Dispatch<React.SetS
 
   // function to delete a note
   const deleteNote = async () => {
-    const response = await axios.delete(`https://notely-orcin.vercel.app/notes`, {data: {id}});
+    const response = await axios.delete(`http://localhost:3500/notes`, {data: {id}});
     return response.data;
   };
 

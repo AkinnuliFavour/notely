@@ -1,10 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import { Notes } from "../../types";
-import { fetchNotes } from "../../utils/fetchNotes";
 import Note from "../../components/Note";
 import Logout from "../../components/Logout";
 
 const CompletedNote = () => {
+
+  const currentUser = JSON.parse(localStorage.getItem("user") || "{}");
+  console.log(currentUser.user.id);
+  const userId = currentUser.user.id;
+
+  const fetchNotes = async () => {
+    const response = await axios.get(
+      `http://localhost:3500/notes?userId=${userId}`,
+    );
+    return response.data; // Assuming API returns requested data
+  };
 
   const {
     data: notes,

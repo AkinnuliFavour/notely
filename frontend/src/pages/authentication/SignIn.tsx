@@ -21,6 +21,7 @@ function SignIn() {
 
     if (typeof (data) !== null) {
       localStorage.setItem('user', JSON.stringify(data))
+      // updateUser(data.user)
     }
 
     return { data, error }

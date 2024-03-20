@@ -19,6 +19,7 @@ export type NoteProps = {
 
 export type FormData = {
   id: number;
+  userId: string;
   title: string;
   category: string;
   description: string;

@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const currentUser = JSON.parse(localStorage.getItem("user") || "{}");
-console.log(currentUser.user.id);
-const userId = currentUser.user.id;
+const userId = currentUser ? currentUser?.user?.id : 0;
 
 export const fetchNotes = async () => {
   const response = await axios.get(`http://localhost:3500/notes?userId=${userId}`);

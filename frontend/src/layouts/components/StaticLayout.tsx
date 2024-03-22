@@ -4,6 +4,7 @@ import AddModal from "../../components/AddModal";
 
 const StaticLayout = () => {
     const [isOpened, setIsOpened] = useState(false);
+    const [isChecked, setIsChecked] = useState(false);
     const navigate = useNavigate();
 
     const handleNavigation = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,7 +62,10 @@ const StaticLayout = () => {
                         name=""
                         id="display"
                         className="accent-[#212121] opacity-[36%]"
+                        onClick={() => setIsChecked(!isChecked)} 
                         onChange={handleNavigation}
+                        checked={isChecked}
+                        onBlur={() => setIsChecked(false)}
                     />
                     <label
                         htmlFor="display"

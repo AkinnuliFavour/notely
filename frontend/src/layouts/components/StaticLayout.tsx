@@ -112,7 +112,7 @@ const StaticLayout = () => {
                     </ul>
                 </div>
 
-                <section className="card-container md:grid justify-center xl:grid-cols-2">
+                <section className="w-full flex flex-col flex-wrap md:flex-row justify-around">
                     <Outlet />
                 </section>
             </section>

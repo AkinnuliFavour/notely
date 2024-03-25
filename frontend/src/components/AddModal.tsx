@@ -34,7 +34,7 @@ const AddModal = ({ setIsOpened }: { setIsOpened: React.Dispatch<React.SetStateA
 
   const createData = async (data: FormType) => {
     console.log(data)
-    const response = await axios.post("http://localhost:3500/notes/", data);
+    const response = await axios.post("https://notely-orcin.vercel.app/notes", data);
     return response.data; // Assuming your API returns updated data
   };
 

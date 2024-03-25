@@ -12,7 +12,7 @@ const Personal = () => {
 
   const fetchNotes = async () => {
     const response = await axios.get(
-      `http://localhost:3500/notes?userId=${userId}`,
+      `https://notely-orcin.vercel.app/notes?userId=${userId}`,
     );
     return response.data; // Assuming API returns requested data
   };

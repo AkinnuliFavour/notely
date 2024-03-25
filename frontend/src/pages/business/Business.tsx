@@ -31,17 +31,23 @@ const Business = () => {
 
   return (
     <>
-      {businessNotes?.map((note) => (
-        <Note
-          key={note._id}
-          id={note._id}
-          category={note.category}
-          title={note.title}
-          description={note.description}
-          date={note.date}
-          completed={note.completed}
-        />
-      ))}
+      {!error ? 
+        businessNotes?.map((note) => (
+          <Note
+            key={note._id}
+            id={note._id}
+            category={note.category}
+            title={note.title}
+            description={note.description}
+            date={note.date}
+            completed={note.completed}
+          />
+        ))
+        :
+        <div className="flex items-center justify-center">
+          <p> There  are notes to display.</p>
+        </div>
+      }
 
       <Logout />
     </>

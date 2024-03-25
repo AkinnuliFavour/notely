@@ -26,21 +26,27 @@ const Home = () => {
 
   if (isLoading) return <img src="/infinite-spinner.svg" alt="" className="w-2/5 absolute top-[50%] left-[25%]" />;
 
-  if (error) return <h1>Error: {error.message}</h1>;
+  // if (error) return <h1>Error: {error.message}</h1>;
 
   return (
     <>
-      {homeNotes?.map((note) => (
-        <Note
-          key={note._id}
-          id={note._id}
-          category={note.category}
-          title={note.title}
-          description={note.description}
-          date={note.date}
-          completed={note.completed}
-        />
-      ))}
+      {!error ?
+        homeNotes?.map((note) => (
+          <Note
+            key={note._id}
+            id={note._id}
+            category={note.category}
+            title={note.title}
+            description={note.description}
+            date={note.date}
+            completed={note.completed}
+          />
+        ))
+        :
+        <div className="flex items-center justify-center">
+          <p> There  are notes to display.</p>
+        </div>
+      }
 
       <Logout />
     </>

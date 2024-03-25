@@ -17,8 +17,8 @@ function App() {
       <Routes>
         <Route path='/sign-up' element={<SignUp />} />
         <Route path='/sign-in' element={<SignIn />} />
-        <Route path='/' element={<Onboarding />} />
         <Route path='/email-verification' element={<EmailVerification />} />
+        <Route path='/' element={<Onboarding />} />
         <Route element={<SharedLayout />}>
           <Route path="/all-tasks" element={<All />} />
           <Route path="/business" element={<Business />} />

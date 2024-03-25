@@ -104,7 +104,7 @@ const StaticLayout = () => {
                         <li>
                             <NavLink
                                 to="/business"
-                                className={({ isActive }) => `${isActive && `text-blue-600`} text-[16px] font-medium outline-none px-2 text-gray-900 opacity-60 hover:opacity-[87%] focus:text-blue-400 focus:opacity-100 `}
+                                className={({ isActive }) => `${isActive && `text-blue-600`} text-[16px] font-medium outline-none px-2 text-gray-900 opacity-60 hover:opacity-[87%] focus:text-blue-400 focus:opacity-100`}
                             >
                                 BUSINESS
                             </NavLink>
@@ -112,7 +112,7 @@ const StaticLayout = () => {
                     </ul>
                 </div>
 
-                <section className="w-full flex flex-col flex-wrap md:flex-row justify-around">
+                <section className="w-full flex flex-col flex-wrap md:flex-row justify-between">
                     <Outlet />
                 </section>
             </section>

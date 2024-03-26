@@ -23,8 +23,6 @@ function SignIn() {
     })
 
     if (typeof (data) !== null) {
-      localStorage.setItem('user', JSON.stringify(data))
-      console.log(data.user)
       data?.user?.id ? updateUser(data.user.id) : updateUser(null)
     }
 

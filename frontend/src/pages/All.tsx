@@ -6,9 +6,6 @@ import Logout from "../components/Logout";
 import { useUserContext } from "../utils/useUserContext";
 
 const All = () => {
-  const currentUser = JSON.parse(localStorage.getItem("user") || "{}");
-  console.log(currentUser.user.id);
-  const userId = currentUser.user.id;
 
   const { user } = useUserContext();
   console.log(user);

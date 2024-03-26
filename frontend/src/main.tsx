@@ -12,7 +12,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <SupabaseProvider>
-        <App />
+        <UserProvider>
+          <App />
+        </UserProvider>
       </SupabaseProvider>
     </QueryClientProvider>
   </React.StrictMode>

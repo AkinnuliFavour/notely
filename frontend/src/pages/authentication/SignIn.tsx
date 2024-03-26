@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react';
 import { Button, Label, TextInput } from 'flowbite-react';
 import { useSupabase } from '../../utils/useSupabaseContext';
+import { useUserContext } from '../../utils/useUserContext';
 
 
 function SignIn() {
@@ -12,6 +13,8 @@ function SignIn() {
 
   const supabase = useSupabase()
 
+  const { updateUser } = useUserContext()
+
   async function signInWithEmail() {
     if (!supabase) return
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -21,7 +24,8 @@ function SignIn() {
 
     if (typeof (data) !== null) {
       localStorage.setItem('user', JSON.stringify(data))
-      // updateUser(data.user)
+      console.log(data.user)
+      data?.user?.id ? updateUser(data.user.id) : updateUser(null)
     }
 
     return { data, error }

@@ -3,15 +3,19 @@ import axios from "axios";
 import Note from "../components/Note";
 import { Notes } from "../types";
 import Logout from "../components/Logout";
+import { useUserContext } from "../utils/useUserContext";
 
 const All = () => {
   const currentUser = JSON.parse(localStorage.getItem("user") || "{}");
   console.log(currentUser.user.id);
   const userId = currentUser.user.id;
 
+  const { user } = useUserContext();
+  console.log(user);
+
   const fetchNotes = async () => {
     const response = await axios.get(
-      `http://localhost:3500/notes?userId=${userId}`,
+      `http://localhost:3500/notes?userId=${user}`,
     );
     return response.data; // Assuming API returns requested data
   };

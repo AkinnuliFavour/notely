@@ -7,16 +7,16 @@ interface UserData {
 }
 
 // Create a context
-const UserContext = createContext<{ user: UserData | null; updateUser: (newUserData: UserData | null) => void }>({
+const UserContext = createContext<{ user: string | null; updateUser: (newUserData: string | null) => void }>({
   user: null,
   updateUser: () => {},
 });
 
 // Create a provider component
 export const UserProvider = ({ children }: {children: React.ReactNode}) => {
-  const [user, setUser] = useState<UserData | null>(null);
+  const [user, setUser] = useState<string | null>(null);
 
-  const updateUser = (newUserData: UserData | null) => {
+  const updateUser = (newUserData: string | null) => {
     setUser(newUserData);
   };
 

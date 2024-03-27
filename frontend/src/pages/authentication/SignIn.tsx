@@ -23,7 +23,10 @@ function SignIn() {
     })
 
     if (typeof (data) !== null) {
-      data?.user?.id ? updateUser(data.user.id) : updateUser(null)
+      if(data?.user?.id){
+        localStorage.setItem('currentUser', data.user.id)
+        updateUser(data.user.id)
+      }else{ localStorage.setItem('currentUser', '') }
     }
 
     return { data, error }

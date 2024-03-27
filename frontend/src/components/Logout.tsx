@@ -12,6 +12,7 @@ const Logout = () => {
                 console.error('Error logging out:', error.message)
                 return
             }
+            localStorage.removeItem('currentUser')
             navigate('/')
         }
     }

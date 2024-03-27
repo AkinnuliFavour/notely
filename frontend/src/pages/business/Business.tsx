@@ -3,18 +3,19 @@ import axios from "axios";
 import Note from "../../components/Note";
 import { Notes } from "../../types";
 import Logout from "../../components/Logout";
+import { useUserContext } from "../../utils/useUserContext";
 
 const Business = () => {
 
-  const currentUser = JSON.parse(localStorage.getItem("user") || "{}");
-  console.log(currentUser.user.id);
-  const userId = currentUser.user.id;
+  const { user } = useUserContext();
 
   const fetchNotes = async () => {
     const response = await axios.get(
-      `https://notely-orcin.vercel.app/notes?userId=${userId}`,
+      `https://notely-orcin.vercel.app/notes?userId=${user}&&category=Business`,
     );
     return response.data; // Assuming API returns requested data
+
+    console.log(response.data)
   };
 
   const {

@@ -6,15 +6,17 @@ interface UserData {
   email: string;
 }
 
+const currentUser = localStorage.getItem('currentUser');
+
 // Create a context
 const UserContext = createContext<{ user: string | null; updateUser: (newUserData: string | null) => void }>({
-  user: null,
+  user: currentUser,
   updateUser: () => {},
 });
 
 // Create a provider component
 export const UserProvider = ({ children }: {children: React.ReactNode}) => {
-  const [user, setUser] = useState<string | null>(null);
+  const [user, setUser] = useState<string | null>(currentUser);
 
   const updateUser = (newUserData: string | null) => {
     setUser(newUserData);

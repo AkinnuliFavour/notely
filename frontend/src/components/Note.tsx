@@ -4,6 +4,7 @@ import DeleteModal from "./DeleteModal";
 import EditModal from "./EditModal";
 import { FormData, NoteProps } from "../types";
 import axios from "axios";
+import { useUserContext } from "../utils/useUserContext";
 
 const Note = ({ id, category, title, description, date, completed }: NoteProps) => {
 
@@ -11,7 +12,7 @@ const Note = ({ id, category, title, description, date, completed }: NoteProps) 
   const [editOpened, setEditOpened] = useState(false);
   const [completedStatus, setCompletedStatus] = useState(completed);
 
-  const userId = JSON.parse(localStorage.getItem("user") || "{}")?.user?.id;
+  const { user } = useUserContext();
 
   const handleCloseEditModal = () => {
     setEditOpened(prev => !prev);
@@ -33,14 +34,16 @@ const Note = ({ id, category, title, description, date, completed }: NoteProps) 
   const handleUpdate = () => {
     setCompletedStatus(prev => !prev);
     // Assuming newData is the data you want to update
-    mutation.mutate({
-      id, 
-      userId,
-      title, 
-      category, 
-      description,  
-      completed: !completed
-    });
+    if(user){
+      mutation.mutate({
+        id, 
+        userId: user,
+        title, 
+        category, 
+        description,  
+        completed: !completed
+      });
+    }
   };
 
 

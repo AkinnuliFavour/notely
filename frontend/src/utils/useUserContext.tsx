@@ -1,11 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
 
-// Define types for user data
-interface UserData {
-  user: string;
-  email: string;
-}
-
 const currentUser = localStorage.getItem('currentUser');
 
 // Create a context

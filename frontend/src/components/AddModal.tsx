@@ -63,8 +63,8 @@ const AddModal = ({ setIsOpened }: { setIsOpened: React.Dispatch<React.SetStateA
   }
 
   return (
-    <main className="w-full h-full backdrop top-0 left-0">
-      <section className="modal">
+    <main className="w-full h-full backdrop top-0 left-0 p-2 md:p-0">
+      <section className="modal w-full md:w-1/2 xl:h-1/4">
         <p className="heading">Add Note</p>
         <form action="" className="modal-form" onSubmit={handlePost}>
           <div className="input-container">

@@ -7,7 +7,7 @@ import axios from "axios";
 
 const Note = ({ id, category, title, description, date, completed }: NoteProps) => {
 
-  const [isOpened, setIsOpened] = useState(false);
+  const [deleteOpened, setDeleteOpened] = useState(false);
   const [editOpened, setEditOpened] = useState(false);
   const [completedStatus, setCompletedStatus] = useState(completed);
 
@@ -15,6 +15,10 @@ const Note = ({ id, category, title, description, date, completed }: NoteProps) 
 
   const handleCloseEditModal = () => {
     setEditOpened(prev => !prev);
+  }
+
+  const handleCloseDeleteModal = () => {
+    setDeleteOpened(prev => !prev);
   }
 
   const queryClient = useQueryClient();
@@ -67,7 +71,7 @@ const Note = ({ id, category, title, description, date, completed }: NoteProps) 
           </button>
           <button
            className="delete-bin ${completedStatus ? 'color' : null}"
-           onClick={() => setIsOpened(true)}
+           onClick={() => setDeleteOpened(true)}
           >
             <img src="/bin.svg" alt="" />
           </button>
@@ -80,7 +84,7 @@ const Note = ({ id, category, title, description, date, completed }: NoteProps) 
         {description}
       </p>
       <p className={`task-date ${completedStatus ? "line-through" : null}`}>{date}</p>
-      {isOpened && <DeleteModal setIsOpened={setIsOpened} id={id}/>}
+      {deleteOpened && <DeleteModal handleCloseDeleteModal={handleCloseDeleteModal} id={id}/>}
       {editOpened && <EditModal handleCloseEditModal={handleCloseEditModal} id={id} />}
     </section>
   );

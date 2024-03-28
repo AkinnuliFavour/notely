@@ -2,6 +2,7 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import axios from "axios";
+import { useUserContext } from "../utils/useUserContext";
 
 export interface FormType {
   userId: string;
@@ -11,15 +12,10 @@ export interface FormType {
   completed: boolean;
 };
 
-interface userObject {
-  id: string
-}
-
 const AddModal = ({ setIsOpened }: { setIsOpened: React.Dispatch<React.SetStateAction<boolean>> }) => {
   const queryClient = useQueryClient()
 
-  const currentUser: userObject = JSON.parse(localStorage.getItem("currentUser") || "{}");
-  console.log(typeof (currentUser.id));
+  const { user } = useUserContext()
 
   // const [formData, setFormData] = useState({
   //   id,
@@ -38,18 +34,25 @@ const AddModal = ({ setIsOpened }: { setIsOpened: React.Dispatch<React.SetStateA
     return response.data; // Assuming your API returns updated data
   };
 
-  const mutation = useMutation({ mutationFn: createData });
+  const mutation = useMutation({
+      mutationFn: createData,
+      onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["notes"] });
+    }
+  });
 
   const handlePost = (e: React.FormEvent) => {
     e.preventDefault()
     // Assuming newData is the data you want to update
-    mutation.mutate({
-      userId: currentUser.id,
-      title,
-      category,
-      description,
-      completed: false
-    });
+    if(user){
+      mutation.mutate({
+        userId: user,
+        title,
+        category,
+        description,
+        completed: false
+      });
+    }
     setIsOpened(false);
   };
 
@@ -58,6 +61,7 @@ const AddModal = ({ setIsOpened }: { setIsOpened: React.Dispatch<React.SetStateA
     queryClient.invalidateQueries({ queryKey: ["notes"] });
     console.log("Success");
   }
+
   return (
     <main className="w-full h-full backdrop top-0 left-0">
       <section className="modal">

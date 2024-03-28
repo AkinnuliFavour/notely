@@ -6,26 +6,24 @@
  * @description This component provides a modal for deleting items.
  */
 
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Notes } from "../types";
-import { fetchNotes } from "../utils/fetchNotes";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
-const DeleteModal = ({setIsOpened, id}:  {setIsOpened: React.Dispatch<React.SetStateAction<boolean>>, id: number}) => {
+const DeleteModal = ({handleCloseDeleteModal, id}:  {handleCloseDeleteModal: () => void, id: number}) => {
 
   console.log(id)
 
   const queryClient = useQueryClient()
 
   //fetch the notes
-  const {
-    data: notes,
-  } = useQuery<Notes>({ queryKey: ["notes"], queryFn: fetchNotes
- });
+//   const {
+//     data: notes,
+//   } = useQuery<Notes>({ queryKey: ["notes"], queryFn: fetchNotes
+//  });
 
   //find the note with the id
-  const note = notes?.find(note => note._id === id)
-  console.log(note)
+  // const note = notes?.find(note => note._id === id)
+  // console.log(note)
 
   // function to delete a note
   const deleteNote = async () => {
@@ -45,7 +43,7 @@ const DeleteModal = ({setIsOpened, id}:  {setIsOpened: React.Dispatch<React.SetS
 
   //if the mutation is successful, close the modal and invalidate the notes query
   if (mutation.isSuccess) {
-    setIsOpened(false);
+    handleCloseDeleteModal();
     queryClient.invalidateQueries({ queryKey: ["notes"] });
     console.log("Success");
   }
@@ -56,7 +54,7 @@ const DeleteModal = ({setIsOpened, id}:  {setIsOpened: React.Dispatch<React.SetS
         <p className="heading">Delete Note</p>
         <p className="">Are you sure you want to delete this note?</p>
         <div className="button-container">
-          <button className="cancel-button" onClick={()=> setIsOpened(false)}>Cancel</button>
+          <button className="cancel-button" onClick={handleCloseDeleteModal}>Cancel</button>
           <button className="delete-button">Delete</button>
         </div>
       </form>

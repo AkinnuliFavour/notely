@@ -5,6 +5,7 @@ import axios from "axios";
 import { fetchNotes } from "../utils/fetchNotes";
 import { Notes } from "../types";
 import { FormData } from "../types";
+import { useUserContext } from "../utils/useUserContext";
 
 const EditModal = ({handleCloseEditModal, id}:  {handleCloseEditModal: () => void, id: number}) => {
 
@@ -16,19 +17,12 @@ const EditModal = ({handleCloseEditModal, id}:  {handleCloseEditModal: () => voi
 
   const note = notes?.find(note => note._id === id)
 
-  // const [formData, setFormData] = useState({
-  //   id,
-  //   title: "",
-  //   category: "",
-  //   description: ""
-  // })
-
   const [title, setTitle] = useState("")
   const [category, setCategory] = useState("Personal")
   const [description, setDescription] = useState("")
 
-  const userId = JSON.parse(localStorage.getItem("user") || "{}")?.user?.id;
-  console.log(userId)
+  const { user } = useUserContext();
+  console.log(user)
 
 useEffect(() => {
   if(note) {
@@ -54,14 +48,17 @@ const mutation = useMutation({
   const handleUpdate = (e: React.FormEvent) => {
     e.preventDefault()
     // Assuming newData is the data you want to update
-    mutation.mutate({
-      id, 
-      userId,
-      title, 
-      category, 
-      description,  
-      completed: note ? note.completed : false
-    });
+
+    if(user){
+      mutation.mutate({
+        id, 
+        userId: user,
+        title, 
+        category, 
+        description,  
+        completed: note ? note.completed : false
+      });
+    }
     
     handleCloseEditModal()
   };

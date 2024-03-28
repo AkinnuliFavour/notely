@@ -49,8 +49,8 @@ const DeleteModal = ({handleCloseDeleteModal, id}:  {handleCloseDeleteModal: () 
   }
 
   return (
-    <main className="w-full h-full backdrop top-0 left-0">
-      <form action="" className="delete-modal" onSubmit={handleDelete}>
+    <main className="w-full h-full backdrop top-0 left-0 p-2 md:p-0">
+      <form action="" className="delete-modal w-full md:w-1/2" onSubmit={handleDelete}>
         <p className="heading">Delete Note</p>
         <p className="">Are you sure you want to delete this note?</p>
         <div className="button-container">

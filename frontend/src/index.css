@@ -43,14 +43,12 @@
   }
   
   .input-container{
-    width: 272px;
     display: flex;
     flex-direction: column;
   }
   
   .description-container{
-    margin-top: 33px;
-    width: 568px;
+    margin-top: 16px;
   }
   
   .title-input, .category-input{

@@ -18,7 +18,7 @@ const EditModal = ({handleCloseEditModal, id}:  {handleCloseEditModal: () => voi
   const queryClient = useQueryClient()
 
   const fetchNotes = async () => {
-    const response = await axios.get(`http://localhost:3500/notes?userId=${user}`);
+    const response = await axios.get(`https://notely-orcin.vercel.app/notes?userId=${user}`);
     return response.data;
   };
 
@@ -74,11 +74,11 @@ const mutation = useMutation({
   }
 
     return (
-      <main className="w-full h-full backdrop top-0 left-0">
-        <section className="modal">
+      <main className="w-full h-full backdrop top-0 left-0 p-2 md:p-0">
+        <section className="modal w-full md:w-2/3 md:h-4/6 lg:h-3/6 xl:h-2/5 2xl:h-1/4">
           <p className="heading">Edit Note</p>
-          <form action="" className="modal-form" onSubmit={handleUpdate}>
-            <div className="input-container">
+          <form action="" className="modal-form md:flex-col" onSubmit={handleUpdate}>
+            <div className="input-container w-full">
               <label htmlFor="title">Title</label>
               <input
                type="text" 
@@ -89,7 +89,7 @@ const mutation = useMutation({
                onChange={(e) => setTitle(e.target.value)}
               />
             </div>
-            <div className="input-container">
+            <div className="input-container w-full">
               <label htmlFor="category">Category</label>
               <select
                 name="category"
@@ -103,7 +103,7 @@ const mutation = useMutation({
                 <option value="Business">Business</option>
               </select>
             </div>
-            <div className="input-cotainer description-container flex flex-col">
+            <div className="input-cotainer description-container flex flex-col w-full">
               <label htmlFor="content">Description(optional)</label>
               <textarea 
                 name="content" 
@@ -119,7 +119,7 @@ const mutation = useMutation({
 
               </textarea>
             </div>
-            <div className="button-container">
+            <div className="button-container md:self-start md:mt-4">
               <button type="button" className="cancel-button" onClick={() => handleCloseEditModal()}>Cancel</button>
               <button 
                 type="submit" 

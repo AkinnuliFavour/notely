@@ -54,7 +54,7 @@ const Note = ({ id, category, title, description, date, completed }: NoteProps) 
   return (
     <section className="custom-card w-full md:w-[45%] lg:w-[30%]">
       <div className="flex justify-between">
-        <h3 className="category-badge ${completed ? 'color' : null}">
+        <h3 className={`category-badge ${completed && 'color'} px-4`}>
           {category}
         </h3>
         <div className="flex items-center">

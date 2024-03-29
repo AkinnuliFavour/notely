@@ -2,20 +2,11 @@
 import { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import axios from "axios";
-import { fetchNotes } from "../utils/fetchNotes";
 import { Notes } from "../types";
 import { FormData } from "../types";
 import { useUserContext } from "../utils/useUserContext";
 
 const EditModal = ({handleCloseEditModal, id}:  {handleCloseEditModal: () => void, id: number}) => {
-
-  const queryClient = useQueryClient()
-
-  const {
-    data: notes,
-  } = useQuery<Notes>({ queryKey: ["notes"], queryFn: fetchNotes });
-
-  const note = notes?.find(note => note._id === id)
 
   const [title, setTitle] = useState("")
   const [category, setCategory] = useState("Personal")
@@ -23,6 +14,19 @@ const EditModal = ({handleCloseEditModal, id}:  {handleCloseEditModal: () => voi
 
   const { user } = useUserContext();
   console.log(user)
+
+  const queryClient = useQueryClient()
+
+  const fetchNotes = async () => {
+    const response = await axios.get(`http://localhost:3500/notes?userId=${user}`);
+    return response.data;
+  };
+
+  const {
+    data: notes,
+  } = useQuery<Notes>({ queryKey: ["notes"], queryFn: fetchNotes });
+
+  const note = notes?.find(note => note._id === id)
 
 useEffect(() => {
   if(note) {

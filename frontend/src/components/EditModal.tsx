@@ -74,8 +74,8 @@ const mutation = useMutation({
   }
 
     return (
-      <main className="w-full h-full backdrop top-0 left-0 p-2 md:p-0">
-        <section className="modal w-full md:w-2/3 md:h-4/6 lg:h-3/6 xl:h-2/5 2xl:h-1/4">
+      <main className="w-full h-full backdrop top-0 left-0 p-2 md:p-4">
+        <section className="modal w-full md:w-2/3 min-h-max">
           <p className="heading">Edit Note</p>
           <form action="" className="modal-form md:flex-col" onSubmit={handleUpdate}>
             <div className="input-container w-full">

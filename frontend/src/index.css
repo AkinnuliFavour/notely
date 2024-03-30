@@ -16,7 +16,6 @@
   
   .modal, .delete-modal{
     background-color: #fff;
-    height: 43%;
     z-index: 3;
     padding: 1rem;
     border-radius: 16px;

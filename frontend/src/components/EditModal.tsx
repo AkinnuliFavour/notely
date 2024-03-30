@@ -119,7 +119,7 @@ const mutation = useMutation({
 
               </textarea>
             </div>
-            <div className="button-container md:self-start md:mt-4">
+            <div className="button-container md:self-start md:mt-4 pb-3">
               <button type="button" className="cancel-button" onClick={() => handleCloseEditModal()}>Cancel</button>
               <button 
                 type="submit" 

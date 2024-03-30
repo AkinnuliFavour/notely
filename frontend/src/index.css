@@ -30,8 +30,6 @@
   
   .modal-form{
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
     gap: 10px;
   }
   
@@ -71,7 +69,6 @@
   }
   
   .button-container{
-    align-self: self-end;
     display: flex;
     justify-content: center;
     align-items: center;

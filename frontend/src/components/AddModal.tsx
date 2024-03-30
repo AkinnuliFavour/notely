@@ -64,9 +64,9 @@ const AddModal = ({ setIsOpened }: { setIsOpened: React.Dispatch<React.SetStateA
 
   return (
     <main className="w-full h-full backdrop top-0 left-0 p-2 md:p-0">
-      <section className="modal w-full md:w-1/2 xl:h-1/4">
+      <section className="modal w-full md:w-1/2 min-h-max">
         <p className="heading">Add Note</p>
-        <form action="" className="modal-form" onSubmit={handlePost}>
+        <form action="" className="modal-form flex-col" onSubmit={handlePost}>
           <div className="input-container">
             <label htmlFor="title">Title</label>
             <input
@@ -108,7 +108,7 @@ const AddModal = ({ setIsOpened }: { setIsOpened: React.Dispatch<React.SetStateA
 
             </textarea>
           </div>
-          <div className="button-container">
+          <div className="button-container self-start">
             <button type="submit" className="cancel-button" onClick={() => setIsOpened(false)}>Cancel</button>
             <button type="button" className="add-button px-6" onClick={handlePost}>Add</button>
           </div>

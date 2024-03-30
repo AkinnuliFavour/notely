@@ -53,7 +53,7 @@ const DeleteModal = ({handleCloseDeleteModal, id}:  {handleCloseDeleteModal: () 
       <form action="" className="delete-modal w-full md:w-1/2" onSubmit={handleDelete}>
         <p className="heading">Delete Note</p>
         <p className="">Are you sure you want to delete this note?</p>
-        <div className="button-container">
+        <div className="button-container self-end">
           <button className="cancel-button" onClick={handleCloseDeleteModal}>Cancel</button>
           <button className="delete-button">Delete</button>
         </div>

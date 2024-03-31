@@ -32,21 +32,25 @@ const DeleteModal = ({handleCloseDeleteModal, id}:  {handleCloseDeleteModal: () 
   };
 
   //useMutation hook
-  const mutation = useMutation({mutationFn: deleteNote});
+  const mutation = useMutation({
+    mutationFn: deleteNote,
+    // if the mutation is successful, invalidate the notes query
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["notes"] });
+    }
+  });
 
   const handleDelete = (e: React.FormEvent) => {
-    //prevent the default form submission
+    // prevent the default form submission
     e.preventDefault()
+
+    // close the modal
+    handleCloseDeleteModal();
+    
     // call the mutation function
     mutation.mutate();
   };
 
-  //if the mutation is successful, close the modal and invalidate the notes query
-  if (mutation.isSuccess) {
-    handleCloseDeleteModal();
-    queryClient.invalidateQueries({ queryKey: ["notes"] });
-    console.log("Success");
-  }
 
   return (
     <main className="w-full h-full backdrop top-0 left-0 p-2 md:p-0">

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Button, Label, TextInput } from 'flowbite-react';
 import { useSupabase } from '../../utils/useSupabaseContext';
 import { useUserContext } from '../../utils/useUserContext';
+import { toast, Bounce, ToastContainer } from 'react-toastify';
 
 
 function SignIn() {
@@ -38,11 +39,27 @@ function SignIn() {
     const { data, error } = response ?? {};
     if (error) {
       console.error('Error signing up:', error)
+      console.log('Error message:', error.message)
+      if(error.message === 'Invalid login credentials'){
+        errorNotify()
+      }
     } else {
       console.log('Sign up successful:', data)
       navigate('/all-tasks')
     }
   }
+
+  const errorNotify = () => toast.error('Invalid login credentials. Please try again.', {
+    position: "top-right",
+    autoClose: 7000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+    transition: Bounce,
+  });
 
   return (
     <section className='w-screen h-screen bg-blue-500 flex flex-col justify-center items-center px-4 lg:px-0'>
@@ -77,6 +94,8 @@ function SignIn() {
 
         <Link to='/sign-up' className='text-center text-white text-base font-semibold hover:underline'>Don't have an account? Join Notely</Link>
       </form>
+
+      <ToastContainer />
     </section>
   );
 }

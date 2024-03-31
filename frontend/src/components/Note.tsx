@@ -83,7 +83,7 @@ const Note = ({ id, category, title, description, date, completed }: NoteProps) 
       <p className={`task-title ${completedStatus ? "line-through" : null}`}>
         {title}
       </p>
-      <p className={`task-description ${completedStatus ? "line-through" : null}`}>
+      <p className={`task-description text-wrap ${completedStatus ? "line-through" : null}`}>
         {description}
       </p>
       <p className={`task-date ${completedStatus ? "line-through" : null}`}>{date}</p>

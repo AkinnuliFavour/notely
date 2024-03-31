@@ -25,15 +25,31 @@ function SignUp() {
     e.preventDefault()
     const response = await signUpNewUser();
     const { data, error } = response ?? {};
+    if (data?.user?.identities && data.user.identities.length > 0) {
+      console.log('User data:', data.user)
+      successNotify()
+    }else {
+      errorNotify()
+    }
     if (error) {
       console.error('Error signing up:', error)
-    } else {
-      console.log('Sign up successful:', data)
-      notify()
+      console.log('Error message:', error.message)
     }
   }
 
-  const notify = () => toast.info('A confirmation link has been sent to your email!', {
+  const successNotify = () => toast.info('A confirmation link has been sent to your email!', {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+    transition: Bounce,
+  });
+
+  const errorNotify = () => toast.error('Error signing up: Email already exists', {
     position: "top-right",
     autoClose: 5000,
     hideProgressBar: false,

@@ -3,6 +3,8 @@ import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import axios from "axios";
 import { useUserContext } from "../utils/useUserContext";
+import { toast, Bounce } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export interface FormType {
   userId: string;
@@ -37,6 +39,7 @@ const AddModal = ({ setIsOpened }: { setIsOpened: React.Dispatch<React.SetStateA
   const mutation = useMutation({
       mutationFn: createData,
       onSuccess: () => {
+      successNotify();
       queryClient.invalidateQueries({ queryKey: ["notes"] });
     }
   });
@@ -61,6 +64,18 @@ const AddModal = ({ setIsOpened }: { setIsOpened: React.Dispatch<React.SetStateA
     queryClient.invalidateQueries({ queryKey: ["notes"] });
     console.log("Success");
   }
+
+  const successNotify = () => toast.success('Note has been created successfully!', {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+    transition: Bounce,
+  });
 
   return (
     <main className="w-full h-full backdrop top-0 left-0 p-2 md:p-0">

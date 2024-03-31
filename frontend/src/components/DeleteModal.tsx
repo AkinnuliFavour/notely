@@ -8,6 +8,8 @@
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import { toast, Bounce } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const DeleteModal = ({handleCloseDeleteModal, id}:  {handleCloseDeleteModal: () => void, id: number}) => {
 
@@ -36,6 +38,7 @@ const DeleteModal = ({handleCloseDeleteModal, id}:  {handleCloseDeleteModal: () 
     mutationFn: deleteNote,
     // if the mutation is successful, invalidate the notes query
     onSuccess: () => {
+      successNotify();
       queryClient.invalidateQueries({ queryKey: ["notes"] });
     }
   });
@@ -51,6 +54,17 @@ const DeleteModal = ({handleCloseDeleteModal, id}:  {handleCloseDeleteModal: () 
     mutation.mutate();
   };
 
+  const successNotify = () => toast.success('Note has been deleted successfully!', {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+    transition: Bounce,
+  });
 
   return (
     <main className="w-full h-full backdrop top-0 left-0 p-2 md:p-0">

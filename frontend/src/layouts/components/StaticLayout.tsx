@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import AddModal from "../../components/AddModal";
+import { ToastContainer } from 'react-toastify';
 
 const StaticLayout = () => {
     const [isOpened, setIsOpened] = useState(false);
@@ -117,6 +118,8 @@ const StaticLayout = () => {
                 </section>
             </section>
             {isOpened && <AddModal setIsOpened={setIsOpened} />}
+
+            <ToastContainer />
         </main >
     )
 }

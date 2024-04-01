@@ -49,7 +49,7 @@ function SignUp() {
     transition: Bounce,
   });
 
-  const errorNotify = () => toast.error('Error signing up: Email already exists', {
+  const errorNotify = () => toast.error("Hmm, it seems you've created an account already", {
     position: "top-right",
     autoClose: 5000,
     hideProgressBar: false,
